@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0d1024">
+<script>try{window.__A=JSON.parse(localStorage.getItem("vawAnim"))||{}}catch(e){window.__A={}}try{document.documentElement.setAttribute("data-tpl",localStorage.getItem("vawMyTpl")||localStorage.getItem("vawTpl")||"classic")}catch(e){}
+(function(){try{var F=JSON.parse(localStorage.getItem("vawFest")),R=document.documentElement;if(F&&F.until>Date.now()){R.setAttribute("data-tpl","classic");for(var k in F.v)R.style.setProperty(k,F.v[k])}}catch(e){}})();</script>
+<title>Vamshi Anime World</title>
+<style>
+:root{--bg:#0d1024;--sf:#171a35;--sf2:#232850;--tx:#eef0ff;--mu:#9aa0c8;--ac:#ffb938;--ac2:#7c8cff;--r:14px}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--tx);font:16px/1.5 "Avenir Next","Segoe UI",system-ui,sans-serif}
+button{font:inherit;color:inherit;cursor:pointer;border:0;border-radius:10px;padding:.5em 1em;background:var(--sf2);transition:background .2s,transform .2s}
+button:hover{background:#343b78}button:disabled{opacity:.4;cursor:not-allowed}
+.pri{background:var(--ac);color:#1a1200;font-weight:700}.pri:hover{background:#ffcb66}
+.dan{background:#a82d47}.sm{padding:.25em .7em;font-size:.85rem;margin:2px}
+:focus-visible{outline:3px solid var(--ac2);outline-offset:2px}
+.mu,small{color:var(--mu)}small{display:block}
+header{position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:1rem;padding:.6rem 4vw;background:rgba(13,16,36,.9);backdrop-filter:blur(12px)}
+.logo{font-weight:800;font-size:1.35rem;letter-spacing:-.03em;margin-right:auto;color:var(--ac)}
+nav{display:flex;gap:.1rem;flex-wrap:wrap}nav button{background:none}nav button:hover{background:var(--sf2)}
+#burger{display:none;font-size:1.3rem}
+@media(max-width:900px){#burger{display:block}nav{display:none;position:absolute;top:100%;left:0;right:0;background:var(--sf);flex-direction:column;padding:1rem}nav.open{display:flex}}
+.ann{background:var(--ac);color:#1a1200;text-align:center;padding:.5rem;font-weight:700}
+.hero{position:relative;min-height:64vh;display:flex;align-items:flex-end;gap:2rem;padding:10vh 4vw 5vh;overflow:hidden;flex-wrap:wrap}
+.hero .bgimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.5}
+.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,var(--bg) 5%,transparent 70%)}
+.hero>div,.hero>.pp{position:relative;z-index:1}
+.hero .pp{width:170px;border-radius:var(--r);transform:rotate(-3deg);box-shadow:8px 8px 0 var(--ac)}
+.hero div{max-width:640px}.hero h1{font-size:clamp(2.2rem,7vw,4.4rem);line-height:.95;letter-spacing:-.04em;margin-bottom:.5rem}
+.acts{display:flex;gap:.6rem;margin-top:1rem;flex-wrap:wrap}
+.sec{padding:1.5rem 4vw}.sec h2{margin-bottom:.8rem;font-size:1.4rem}
+.scroll{display:flex;gap:14px;overflow-x:auto;padding-bottom:10px;scroll-snap-type:x mandatory}
+.scroll .card{flex:0 0 150px;scroll-snap-align:start}
+@media(min-width:900px){.scroll .card{flex-basis:190px}}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+@media(min-width:640px){.grid{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:900px){.grid{grid-template-columns:repeat(4,1fr)}}
+@media(min-width:1200px){.grid{grid-template-columns:repeat(5,1fr)}}
+@media(min-width:1500px){.grid{grid-template-columns:repeat(6,1fr)}}
+.card{position:relative;display:block;text-align:left;padding:0;background:var(--sf);border-radius:var(--r);overflow:hidden}
+.card:hover{transform:translateY(-4px)}
+.card img{width:100%;aspect-ratio:2/3;object-fit:cover;display:block}.card .b{padding:.6rem}
+.badge{position:absolute;top:8px;left:8px;background:var(--ac);color:#1a1200;border-radius:6px;padding:2px 8px;font-size:.75rem;font-weight:700}
+.chips{display:flex;flex-wrap:wrap;gap:8px}.chips button{border-radius:99px}
+.filters{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:1rem}.filters #q{grid-column:1/-1}
+@media(min-width:900px){.filters{grid-template-columns:2fr 1fr 1fr 1fr 1fr}.filters #q{grid-column:auto}}
+input,select,textarea{width:100%;font:inherit;background:var(--bg);color:var(--tx);border:1px solid #3a418a;border-radius:8px;padding:.5em}
+.empty{grid-column:1/-1;color:var(--mu);padding:2rem;text-align:center}
+.ov{position:fixed;inset:0;background:rgba(5,6,16,.85);display:none;place-items:start center;z-index:40;overflow:auto;padding:4vh 3vw}.ov.on{display:grid}
+#lg{z-index:55;place-items:center}#fm{z-index:60}#adm{z-index:50}
+.box{position:relative;background:var(--sf);border-radius:18px;width:min(860px,100%);padding:1.3rem;animation:pop .25s}
+@keyframes pop{from{transform:scale(.95);opacity:0}}
+.wide{width:min(1100px,100%)}.x{position:absolute;top:10px;right:10px;z-index:3;background:rgba(0,0,0,.5)}
+.ban{width:calc(100% + 2.6rem);margin:-1.3rem -1.3rem 0;height:170px;object-fit:cover;border-radius:18px 18px 0 0;display:block;opacity:.7}
+.dh{display:flex;gap:1rem;margin-top:-60px;position:relative;flex-wrap:wrap}.dh .pp{width:130px;border-radius:12px;align-self:flex-start}.dh>div{flex:1;min-width:220px;padding-top:62px}
+h3{margin:1rem 0 .4rem}.cd{color:var(--ac)}
+details{background:var(--bg);border-radius:10px;margin:6px 0;padding:.5rem .8rem}summary{cursor:pointer;font-weight:700}
+.ep{display:flex;justify-content:space-between;align-items:center;gap:.8rem;padding:.6rem 0;border-top:1px solid #2a3060;flex-wrap:wrap}
+.stars button{background:none;font-size:2rem;color:var(--ac);padding:0 .1em}
+.br{display:flex;align-items:center;gap:8px;font-size:.85rem}.br span{width:2.4em}.br b{width:3em;text-align:right}
+.bar{flex:1;height:8px;background:var(--bg);border-radius:4px}.bar i{display:block;height:100%;background:var(--ac);border-radius:4px}
+label{display:block;margin:.5rem 0 .2rem;color:var(--mu)}label input,label select,label textarea{margin-top:.2rem}
+.ck{display:inline-block;margin:.2rem .6rem .2rem 0;color:var(--tx)}.ck input{width:auto}
+fieldset{border:1px solid #3a418a;border-radius:8px;padding:.4rem .8rem;margin:.6rem 0}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:.8rem 0}.tabs .on{background:var(--ac);color:#1a1200}
+.note{background:#3a2d12;border-left:4px solid var(--ac);padding:.6rem;border-radius:8px;margin-bottom:1rem}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px}
+.stats div{background:var(--bg);border-radius:var(--r);padding:1rem}.stats b{display:block;font-size:2rem;color:var(--ac)}
+.row{background:var(--bg);border-radius:12px;padding:.7rem;margin:8px 0}.sub{margin:.4rem 0 0 1rem}.sub2{margin-left:1.2rem;font-size:.9rem;color:var(--mu)}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%}td,th{padding:.4rem .6rem;border-bottom:1px solid #2a3060;text-align:left}
+.err{color:#ff8a9d;min-height:1.5em}#aq{margin-bottom:.8rem}.maint main{display:none}.maint:before{content:"We are updating the site. Please check back soon.";display:block;padding:25vh 4vw;font-size:1.6rem;text-align:center}
+footer{padding:2rem 4vw;background:var(--sf);margin-top:2rem;color:var(--mu);font-size:.9rem}footer h3{color:var(--tx)}footer p{margin:.5rem 0;max-width:80ch}footer a{color:var(--ac2);margin-right:1rem}
+/* ===== v2: template variables, loader, effects, polish ===== */
+:root{--hd:rgba(13,16,36,.9);--hv:#343b78;--bd:#3a418a;--bd2:#2a3060;--acx:#1a1200}
+html{scroll-behavior:smooth}
+body{font-family:var(--font,"Avenir Next","Segoe UI",system-ui,sans-serif)}
+button:hover{background:var(--hv)}.pri:hover{background:var(--ac);filter:brightness(1.12)}
+header{background:var(--hd)}input,select,textarea,fieldset{border-color:var(--bd)}.ep,td,th{border-color:var(--bd2)}
+.pri,.ann,.badge,.tabs .on{color:var(--acx)}.dan{color:#fff}
+::selection{background:var(--ac);color:var(--acx)}*{scrollbar-width:thin;scrollbar-color:var(--sf2) transparent}
+.sec{scroll-margin-top:72px;transition:opacity .6s,transform .6s}.card img{background:var(--sf2);transition:transform .5s}.card:hover img{transform:scale(1.04)}
+input[type=range]{padding:0;border:0;accent-color:var(--ac)}
+pre{white-space:pre-wrap;background:var(--bg);padding:.6rem;border-radius:8px;font-size:.78rem;margin-top:.5rem;user-select:all}
+/* loading screen */
+.ldr{position:fixed;inset:0;z-index:100;display:grid;place-items:center;background:var(--bg);transition:opacity .5s,visibility .5s;cursor:progress}
+.ldr.out{opacity:0;visibility:hidden;pointer-events:none}
+.lw{display:grid;gap:1.1rem;justify-items:center;text-align:center}.lan{height:84px;display:grid;place-items:center}
+.lt{color:var(--mu);letter-spacing:.2em;text-transform:uppercase;font-size:.8rem;animation:blink calc(1.6s*var(--spd,1)) ease-in-out infinite}
+@keyframes blink{50%{opacity:.35}}@keyframes spin{to{transform:rotate(360deg)}}
+.l-ring{width:56px;height:56px;border-radius:50%;border:5px solid var(--sf2);border-top-color:var(--ac);border-right-color:var(--ac2);animation:spin calc(.9s*var(--spd,1)) linear infinite}
+.l-dots{display:flex;gap:10px}.l-dots i{width:16px;height:16px;border-radius:50%;background:var(--ac);animation:bn calc(.8s*var(--spd,1)) ease-in-out infinite}
+.l-dots i:nth-child(2){background:var(--ac2);animation-delay:calc(.12s*var(--spd,1))}.l-dots i:nth-child(3){animation-delay:calc(.24s*var(--spd,1))}
+@keyframes bn{0%,80%,100%{transform:translateY(0) scale(.8)}40%{transform:translateY(-22px) scale(1.1)}}
+.l-pulse{width:70px;height:70px;border-radius:50%;background:radial-gradient(circle,var(--ac),var(--ac2));display:grid;place-items:center;color:var(--acx);font:800 2rem/1 Georgia,serif;animation:pl calc(1.2s*var(--spd,1)) ease-in-out infinite}
+.l-pulse:after{content:attr(data-c)}@keyframes pl{0%,100%{transform:scale(.88);box-shadow:0 0 0 0 color-mix(in srgb,var(--ac) 55%,transparent)}50%{transform:scale(1);box-shadow:0 0 0 24px transparent}}
+.l-petals{position:relative;width:150px;height:84px}.l-petals i{position:absolute;top:-8px;font-style:normal;font-size:1.4rem;opacity:0;animation:pt calc(2.2s*var(--spd,1)) linear infinite}
+.l-petals i:nth-child(1){left:4%}.l-petals i:nth-child(2){left:27%;animation-delay:calc(.45s*var(--spd,1))}.l-petals i:nth-child(3){left:50%;animation-delay:calc(.9s*var(--spd,1))}.l-petals i:nth-child(4){left:72%;animation-delay:calc(1.3s*var(--spd,1))}.l-petals i:nth-child(5){left:90%;animation-delay:calc(1.7s*var(--spd,1))}
+@keyframes pt{0%{transform:translate(0,0) rotate(0);opacity:0}15%{opacity:1}100%{transform:translate(28px,96px) rotate(300deg);opacity:0}}
+.l-bars{display:flex;align-items:center;gap:6px;height:56px}.l-bars i{width:9px;height:100%;border-radius:5px;background:var(--ac);animation:eq calc(.9s*var(--spd,1)) ease-in-out infinite}
+.l-bars i:nth-child(2){background:var(--ac2);animation-delay:calc(.1s*var(--spd,1))}.l-bars i:nth-child(3){animation-delay:calc(.2s*var(--spd,1))}.l-bars i:nth-child(4){background:var(--ac2);animation-delay:calc(.3s*var(--spd,1))}.l-bars i:nth-child(5){animation-delay:calc(.4s*var(--spd,1))}
+@keyframes eq{0%,100%{transform:scaleY(.25)}50%{transform:scaleY(1)}}
+.l-orbit{position:relative;width:64px;height:64px}.l-orbit i{position:absolute;inset:0;border-radius:50%;animation:spin calc(1.6s*var(--spd,1)) linear infinite}
+.l-orbit i:before{content:"";position:absolute;top:0;left:50%;width:12px;height:12px;margin-left:-6px;border-radius:50%;background:var(--ac)}
+.l-orbit i:nth-child(2){inset:12px;animation-duration:calc(1.1s*var(--spd,1));animation-direction:reverse}.l-orbit i:nth-child(2):before{background:var(--ac2);width:10px;height:10px;margin-left:-5px}
+.l-orbit i:nth-child(3){inset:24px;animation-duration:calc(.7s*var(--spd,1))}.l-orbit i:nth-child(3):before{width:8px;height:8px;margin-left:-4px}
+.l-line{width:220px;height:6px;border-radius:99px;background:var(--sf2);overflow:hidden}
+.l-line:after{content:"";display:block;height:100%;width:40%;border-radius:99px;background:linear-gradient(90deg,var(--ac),var(--ac2));animation:ln calc(1.1s*var(--spd,1)) ease-in-out infinite}
+@keyframes ln{from{transform:translateX(-100%)}to{transform:translateX(260%)}}
+/* floating effects (petals / stars / snow) */
+#fx{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:5}
+#fx span{position:absolute;top:-6%;color:var(--ac);opacity:0;animation:fall linear infinite}
+@keyframes fall{0%{transform:translate3d(0,0,0) rotate(0);opacity:0}8%{opacity:.85}90%{opacity:.7}100%{transform:translate3d(var(--dx,0),112vh,0) rotate(360deg);opacity:0}}
+/* animation settings from the admin panel */
+body[data-reveal=on] .sec:not(.in){opacity:0;transform:translateY(26px)}
+@keyframes kb{from{transform:scale(1)}to{transform:scale(1.14)}}
+body[data-hero=kenburns] .hero .bgimg{animation:kb 20s ease-in-out infinite alternate}
+body[data-card=zoom] .card:hover{transform:scale(1.06)}
+body[data-card=tilt] .card:hover{transform:perspective(700px) rotateY(-7deg) rotateX(3deg) translateY(-4px)}
+body[data-card=glow] .card:hover{transform:translateY(-3px);box-shadow:0 0 0 2px var(--ac),0 10px 30px color-mix(in srgb,var(--ac) 45%,transparent)}
+body[data-card=none] .card:hover{transform:none}body[data-card=none] .card:hover img{transform:none}
+.nomo *,.nomo *:before,.nomo *:after{animation:none!important;transition:none!important}html:has(.nomo){scroll-behavior:auto}
+/* templates */
+[data-tpl=neon]{--bg:#05030f;--sf:#0e0a22;--sf2:#1a1240;--tx:#f3eeff;--mu:#a79bd6;--ac:#00f0ff;--ac2:#ff2bd6;--hd:rgba(5,3,15,.88);--hv:#2a1d66;--bd:#5b2fd1;--bd2:#2a1d66;--acx:#001316;--r:10px}
+[data-tpl=neon] header{border-bottom:1px solid var(--bd2);box-shadow:0 2px 26px rgba(0,240,255,.12)}[data-tpl=neon] .logo,[data-tpl=neon] .hero h1{text-shadow:0 0 18px color-mix(in srgb,var(--ac) 55%,transparent)}
+[data-tpl=neon] .card{border:1px solid var(--bd2)}[data-tpl=neon] .card:hover{box-shadow:0 0 0 2px var(--ac),0 0 26px color-mix(in srgb,var(--ac) 55%,transparent)}
+[data-tpl=sakura]{--bg:#fff4f8;--sf:#ffffff;--sf2:#ffe3ed;--tx:#3b1a2b;--mu:#8d6a7c;--ac:#e83e8c;--ac2:#7b5cff;--hd:rgba(255,244,248,.92);--hv:#ffd0e0;--bd:#f2a9c4;--bd2:#f7d3e1;--acx:#ffffff;--r:20px}
+[data-tpl=sakura] .card{box-shadow:0 4px 18px rgba(232,62,140,.15)}[data-tpl=sakura] header{box-shadow:0 2px 14px rgba(232,62,140,.12)}[data-tpl=sakura] .hero .bgimg{opacity:.35}[data-tpl=sakura] .ov{background:rgba(255,226,238,.88)}[data-tpl=sakura] .note{background:#ffe9f1}[data-tpl=sakura] .x{color:#fff}
+[data-tpl=ocean]{--bg:#06141f;--sf:#0b2233;--sf2:#123350;--tx:#e6f6ff;--mu:#8fb6cc;--ac:#35d0ba;--ac2:#4aa8ff;--hd:rgba(6,20,31,.88);--hv:#1c4a72;--bd:#2b6a96;--bd2:#14405f;--acx:#02211c;--r:16px}
+[data-tpl=ocean] body{background:radial-gradient(1200px 600px at 80% -10%,#0f3a5c,var(--bg)) fixed}[data-tpl=ocean] .card,[data-tpl=ocean] .box{border:1px solid rgba(53,208,186,.2);backdrop-filter:blur(6px)}
+[data-tpl=retro]{--bg:#1b1226;--sf:#2a1b3d;--sf2:#3d2a57;--tx:#fff6e0;--mu:#c2a8d8;--ac:#ffd93d;--ac2:#ff6b6b;--hd:rgba(27,18,38,.94);--hv:#573a7c;--bd:#ff6b6b;--bd2:#4a3366;--acx:#1b1226;--r:2px;--font:"Courier New",ui-monospace,monospace}
+[data-tpl=retro] button,[data-tpl=retro] input,[data-tpl=retro] select,[data-tpl=retro] textarea{border-radius:2px}[data-tpl=retro] .card,[data-tpl=retro] .box{border:2px solid var(--bd);box-shadow:4px 4px 0 var(--bd)}[data-tpl=retro] .card:hover{box-shadow:6px 6px 0 var(--ac)}[data-tpl=retro] .logo{text-transform:uppercase}
+[data-tpl=cinema]{--bg:#000;--sf:#141414;--sf2:#262626;--tx:#ffffff;--mu:#a3a3a3;--ac:#e50914;--ac2:#ff7a45;--hd:rgba(0,0,0,.88);--hv:#3a3a3a;--bd:#4a4a4a;--bd2:#2a2a2a;--acx:#ffffff;--r:6px}
+[data-tpl=cinema] .hero{min-height:78vh}[data-tpl=cinema] .logo{text-transform:uppercase;letter-spacing:.08em}[data-tpl=cinema] .scroll .card{flex-basis:200px}@media(min-width:900px){[data-tpl=cinema] .scroll .card{flex-basis:235px}}[data-tpl=cinema] .card:hover{transform:scale(1.07);z-index:2}
+/* admin: animation + template + visitor widgets */
+.lpick,.tplg{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin:.6rem 0}.tplg{grid-template-columns:repeat(auto-fill,minmax(170px,1fr))}
+.lpick button,.tc{background:var(--bg);border:2px solid transparent;overflow:hidden}.lpick button{display:grid;gap:.3rem;justify-items:center;padding:.5rem .4rem}.lpick button.on,.tc.on{border-color:var(--ac)}.lpick .lan{transform:scale(.55);height:56px;width:100%}.lpick .l-line{width:150px}.lpick button{min-height:104px;align-content:center}
+.tc{display:grid;gap:.3rem;text-align:left;padding:.7rem}.tc em{color:var(--ac);font-style:normal;font-size:.8rem;font-weight:700}.sw{display:flex;height:34px;border-radius:8px;overflow:hidden}.sw i{flex:1}
+.cg{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:4px 14px;margin:.6rem 0}.cg label b{font-size:.85rem;color:var(--ac)}
+.live{display:inline-flex;align-items:center;gap:6px;font-weight:800;color:#3ddc84;font-size:.8rem}.live i{width:9px;height:9px;border-radius:50%;background:#3ddc84;animation:lv 1.4s infinite}
+@keyframes lv{0%{box-shadow:0 0 0 0 rgba(61,220,132,.7)}100%{box-shadow:0 0 0 10px transparent}}
+.vchart{display:flex;align-items:stretch;gap:6px;height:170px;margin:1rem 0}.vc{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:.7rem;color:var(--mu)}
+.vc .bw{flex:1;width:100%;display:flex;align-items:flex-end}.vc i{display:block;width:100%;background:linear-gradient(var(--ac),var(--ac2));border-radius:4px 4px 0 0;transition:height .5s}
+/* toast + back to top + header look button */
+#toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,30px);background:var(--sf2);color:var(--tx);padding:.6rem 1.1rem;border-radius:99px;box-shadow:0 8px 30px rgba(0,0,0,.4);opacity:0;pointer-events:none;transition:.25s;z-index:130}#toast.on{opacity:1;transform:translate(-50%,0)}
+#totop{position:fixed;right:18px;bottom:20px;z-index:35;width:44px;height:44px;padding:0;border-radius:50%;background:var(--ac);color:var(--acx);font-size:1.2rem;font-weight:800;opacity:0;transform:translateY(16px);pointer-events:none;box-shadow:0 6px 20px rgba(0,0,0,.35)}
+#totop.on{opacity:1;transform:none;pointer-events:auto}#totop:hover{background:var(--ac);filter:brightness(1.1)}#tbtn{font-size:1.15rem}
+/* festival themes */
+.ann.fest{background:linear-gradient(90deg,var(--ac),var(--ac2))}
+.fsw{display:inline-flex;vertical-align:middle;height:16px;border-radius:4px;overflow:hidden;margin-right:6px}.fsw i{width:14px}
+#pvbar{position:fixed;top:10px;left:50%;transform:translateX(-50%);z-index:125;max-width:92vw;display:flex;align-items:center;gap:.6rem;background:var(--ac);color:var(--acx);padding:.4rem .5rem .4rem 1rem;border-radius:99px;font-weight:700;font-size:.9rem;box-shadow:0 6px 24px rgba(0,0,0,.45)}#pvbar button{background:var(--bg);color:var(--tx)}
+/* ===== weekly schedule ===== */
+.sbox{position:relative;max-width:1000px;margin:0 auto;border:1.5px solid var(--bd2);border-radius:32px;padding:1.1rem;background:radial-gradient(520px 260px at 8% 0,color-mix(in srgb,var(--ac2) 18%,transparent),transparent),radial-gradient(420px 240px at 100% 100%,color-mix(in srgb,var(--ac) 10%,transparent),transparent),var(--sf)}
+@media(min-width:900px){.sbox{padding:2rem}}
+.stabs{display:flex;align-items:center;gap:10px}
+.sdays{position:relative;display:flex;gap:10px;flex:1;overflow-x:auto;padding:8px 14px;scrollbar-width:none;-webkit-mask-image:linear-gradient(90deg,transparent,#000 14px,#000 calc(100% - 22px),transparent);mask-image:linear-gradient(90deg,transparent,#000 14px,#000 calc(100% - 22px),transparent)}
+.sdays::-webkit-scrollbar{display:none}
+.sar{flex:0 0 46px;width:46px;height:46px;padding:0;border-radius:50%;border:1.5px solid var(--bd);background:var(--bg);font-size:1.7rem;line-height:1;font-weight:800}
+.sar:hover{background:var(--hv);transform:scale(1.08)}
+.sd{flex:0 0 auto;display:flex;align-items:center;gap:.55rem;white-space:nowrap;text-transform:uppercase;font-weight:800;letter-spacing:.02em;padding:.75rem 1.15rem;border-radius:99px;border:1.5px solid var(--bd);background:transparent}
+.sd .ic{font-size:1rem}
+.sd em{font-style:normal;font-size:.72rem;min-width:1.5em;text-align:center;padding:1px 6px;border-radius:99px;background:var(--sf2)}
+.sd.today:after{content:"";width:8px;height:8px;border-radius:50%;background:#3ddc84;box-shadow:0 0 8px #3ddc84}
+.sd.on{background:linear-gradient(135deg,#4f5bff,#9333ea);border-color:transparent;color:#fff;box-shadow:0 8px 28px rgba(120,80,255,.5);transform:translateY(-1px)}
+.sd.on em{background:rgba(255,255,255,.25)}
+.sh{display:flex;align-items:center;gap:.75rem;margin:1.6rem 0 .4rem;font-size:clamp(1.25rem,5.2vw,2rem);letter-spacing:-.01em}
+.sh .ico{flex:0 0 auto;width:2.1rem;height:2.1rem;display:grid;place-items:center;border-radius:50%;background:linear-gradient(135deg,#4f6bff,#7a4dff);font-size:1rem;color:#fff;box-shadow:0 0 18px rgba(100,110,255,.55)}
+.sh em{font-style:normal;background:linear-gradient(90deg,#4f8bff,#a46bff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.stz{padding-bottom:.9rem;margin-bottom:1rem;border-bottom:1px solid var(--bd2);font-size:.85rem}
+.stl{padding:.2rem 0}
+.srow{position:relative;display:grid;grid-template-columns:30px 72px 1fr;align-items:center;gap:6px;padding:.6rem 0;animation:sIn .55s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--i,0)*85ms)}
+.noan .srow{animation:none!important}
+@keyframes sIn{from{opacity:0;transform:translateX(28px)}}
+.srow:before{content:"";position:absolute;left:13px;top:0;bottom:0;width:4px;border-radius:3px;background:linear-gradient(var(--c),var(--c2))}
+.srow.first:before{top:50%}.srow.last:before{bottom:50%}.srow.first.last:before{display:none}
+.dt{position:relative;z-index:1;display:grid;place-items:center}
+.dt i{width:22px;height:22px;border-radius:50%;background:var(--c);box-shadow:0 0 0 6px color-mix(in srgb,var(--c) 30%,transparent),0 0 16px var(--c)}
+.srow.next .dt i,.srow.now .dt i{animation:dp 1.5s ease-in-out infinite}
+@keyframes dp{50%{transform:scale(1.3)}}
+.stm{text-align:center;line-height:1.1}
+.stm b{display:block;font-size:1.25rem;color:var(--ac2);letter-spacing:-.01em}
+.stm small{margin-top:.3rem;font-weight:700}
+.sc{position:relative;display:block;width:100%;min-height:104px;padding:1.05rem 1.15rem;text-align:left;border-radius:26px;border:1.5px solid var(--bd);background:linear-gradient(135deg,color-mix(in srgb,var(--ac2) 8%,transparent),transparent),var(--bg);overflow:hidden;transition:transform .25s,box-shadow .25s,border-color .25s}
+.sc:hover{background:linear-gradient(135deg,color-mix(in srgb,var(--ac2) 8%,transparent),transparent),var(--bg);transform:translateX(4px)}
+button.sc:hover{border-color:var(--ac2);box-shadow:0 10px 30px color-mix(in srgb,var(--ac2) 30%,transparent)}
+div.sc{cursor:default}
+.sc .im{position:absolute;inset:0 0 0 42%;background-size:cover;background-position:center 20%;opacity:.5;filter:grayscale(.35);-webkit-mask-image:linear-gradient(90deg,transparent,#000 65%);mask-image:linear-gradient(90deg,transparent,#000 65%);transition:opacity .3s,transform .5s}
+.sc:hover .im{opacity:.85;transform:scale(1.07)}
+.sc b{position:relative;z-index:1;display:block;max-width:80%;font-size:1rem;line-height:1.3;text-shadow:0 1px 8px var(--bg)}
+.sbs{position:relative;z-index:1;display:flex;flex-wrap:wrap;gap:6px;margin-top:.75rem}
+.sbadge{display:inline-flex;align-items:center;gap:.45rem;padding:.38rem .85rem;border-radius:99px;background:rgba(0,0,0,.62);color:#ff9be6;font-size:.78rem;font-weight:800;letter-spacing:.03em;text-transform:uppercase}
+.sbadge i{font-style:normal;color:#ffd23f}
+.sbadge.live{background:#ff3b5c;color:#fff;animation:blink 1.2s ease-in-out infinite}
+.sbadge.up{color:#7dffb3}
+.srow.past{opacity:.5}
+.srow.next .sc{border-color:var(--ac2);box-shadow:0 0 0 1px var(--ac2),0 12px 32px color-mix(in srgb,var(--ac2) 32%,transparent)}
+.srow.now .sc{border-color:#ff3b5c;box-shadow:0 0 0 1px #ff3b5c,0 12px 32px rgba(255,59,92,.3)}
+.sstay{display:flex;align-items:center;gap:1.1rem;margin-top:1.6rem;padding:1.1rem 1.3rem;border:1.5px solid var(--bd);border-radius:26px;background:linear-gradient(135deg,color-mix(in srgb,var(--ac2) 16%,var(--bg)),var(--bg))}
+.sstay .mg{flex:0 0 auto;font-size:2.1rem;display:inline-block;animation:wob 2.6s ease-in-out infinite;transform-origin:70% 70%}
+@keyframes wob{0%,60%,100%{transform:rotate(0)}70%{transform:rotate(-14deg)}80%{transform:rotate(12deg)}90%{transform:rotate(-8deg)}}
+.sstay b{display:block;font-size:1.15rem}.sstay p{color:var(--mu);margin-top:.2rem}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="ldr" id="ldr" role="status" aria-label="Loading"></div>
+<script>
+window.vawLoader=function(s,c){c=String(c||"V").charAt(0).replace(/[<>"'&]/g,"V");var m={ring:'<span class="l-ring"></span>',dots:'<span class="l-dots"><i></i><i></i><i></i></span>',pulse:'<span class="l-pulse" data-c="'+c+'"></span>',petals:'<span class="l-petals"><i>🌸</i><i>🌸</i><i>🌸</i><i>🌸</i><i>🌸</i></span>',bars:'<span class="l-bars"><i></i><i></i><i></i><i></i><i></i></span>',orbit:'<span class="l-orbit"><i></i><i></i><i></i></span>',line:'<span class="l-line"></span>'};return m[s]||m.ring};
+window.vawLdr=function(s,c){return'<div class="lw"><div class="lan">'+vawLoader(s,c)+'</div><div class="lt"></div></div>'};
+(function(){var a=window.__A||{},l=document.getElementById("ldr"),seen=0;try{seen=sessionStorage.getItem("vawLd")}catch(e){}
+if(a.loader===false||a.off||(a.freq==="session"&&seen)||(window.matchMedia&&matchMedia("(prefers-reduced-motion:reduce)").matches)){l.parentNode.removeChild(l);return}
+try{sessionStorage.setItem("vawLd","1")}catch(e){}
+l.setAttribute("data-ls",a.style||"ring");l.style.setProperty("--spd",a.speed||1);l.innerHTML=vawLdr(a.style,a.ch);l.querySelector(".lt").textContent=a.text||"Loading…";
+window.__t0=Date.now();window.__min=a.min==null?1200:a.min;
+setTimeout(function(){var e=document.getElementById("ldr");if(e)e.classList.add("out")},9000)})();
+</script>
+<div id="fx" aria-hidden="true"></div>
+<header><div class="logo" id="logo"></div><button id="burger" data-a="burger" aria-label="Menu">☰</button>
+<nav id="nav" aria-label="Main"><button data-a="go" data-i="home">Home</button><button data-a="go" data-i="browse" data-j="cartoon">Cartoons</button><button data-a="go" data-i="browse" data-j="anime">Anime</button><button data-a="go" data-i="browse" data-j="movie">Movies</button><button data-a="go" data-i="sched">Schedule</button><button data-a="go" data-i="latest">Latest</button><button data-a="go" data-i="trend">Trending</button><button data-a="go" data-i="toprated">Top Rated</button><button data-a="go" data-i="cats">Categories</button><button data-a="srch">Search</button><button class="pri" data-a="adm">ADMIN PANEL</button></nav><button id="tbtn" data-a="tpicker" aria-label="Change look" title="Change look" hidden>🎨</button></header>
+<main><div id="ann"></div><section class="hero" id="hero"></section><div id="rows"></div>
+<section class="sec" id="browse"><h2>Browse &amp; search</h2><div class="filters"><input id="q" type="search" placeholder="Search title, character, genre, language or year" aria-label="Search"><select id="fl" aria-label="Language"></select><select id="fg" aria-label="Genre"></select><select id="fy" aria-label="Year"></select><select id="fty" aria-label="Type"></select></div><div class="grid" id="res"></div></section></main>
+<footer id="foot"></footer>
+<div class="ov" id="dm"><div class="box" id="dbx" role="dialog" aria-modal="true"></div></div>
+<div class="ov" id="lg"><div class="box" style="max-width:360px"><button class="x" data-a="closeLg" aria-label="Close">✕</button><h3>Admin Code</h3><form id="lf"><input id="lc" type="password" inputmode="numeric" autocomplete="off" aria-label="Admin code"><p class="err" id="le" role="alert"></p><button class="pri">Enter</button></form></div></div>
+<div class="ov" id="adm"><div class="box wide"><button class="x" data-a="closeAdm" aria-label="Close admin">✕</button><h2>Admin Panel</h2><div class="tabs" id="tabs"></div><input id="aq" placeholder="Search this list by title" aria-label="Search admin list"><div id="ab"></div></div></div>
+<div class="ov" id="fm"><div class="box" id="fb" style="max-width:560px"></div></div>
+<button id="totop" data-a="top" aria-label="Back to top">↑</button>
+<input type="file" id="imp" accept="application/json" hidden>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script>
+/* ===== CONFIG (change the site name here) ===== */
+const SITE_NAME="Vamshi Anime World",ADMIN_CODE="5349",KEY="vawDB_v1"; // ADMIN_CODE is NOT secure: replace with real backend auth later
+const LANGS=["English","Japanese","Telugu","Hindi","Tamil","Malayalam","Kannada","Bengali","Other"],
+GENRES=["Action","Adventure","Animation","Biography","Comedy","Crime","Cyberpunk","Dark Fantasy","Documentary","Drama","Educational","Family","Fantasy","Game","Historical","Horror","Isekai","Josei","Kids","Magic","Martial Arts","Mecha","Music","Musical","Mystery","Post-Apocalyptic","Psychological","Romance","Samurai","School","Sci-Fi","Seinen","Shoujo","Shounen","Slice of Life","Sports","Superhero","Supernatural","Survival","Thriller","Vampire","War","Western","Other"],
+QUAL=["360p","480p","720p","1080p","4K"];
+/* Look & feel defaults: admin can change all of these in Animations / Templates tabs */
+const ANIM_DEF={loader:true,freq:"always",style:"ring",text:"Loading…",min:1200,speed:1,card:"lift",reveal:true,hero:"kenburns",fx:"none",fxn:14,off:false},
+TPL={classic:{n:"Classic Night",d:"The original deep blue and gold",c:["#0d1024","#171a35","#ffb938","#7c8cff"]},
+neon:{n:"Neon Arcade",d:"Black with glowing cyan and pink",c:["#05030f","#1a1240","#00f0ff","#ff2bd6"]},
+sakura:{n:"Sakura Light",d:"Bright pink and white, soft and round",c:["#fff4f8","#ffe3ed","#e83e8c","#7b5cff"]},
+ocean:{n:"Deep Ocean",d:"Teal glass cards on dark blue",c:["#06141f","#123350","#35d0ba","#4aa8ff"]},
+retro:{n:"Retro Pixel",d:"Arcade colours, mono font, hard shadows",c:["#1b1226","#3d2a57","#ffd93d","#ff6b6b"]},
+cinema:{n:"Cinema Red",d:"Big posters, pure black and red",c:["#000000","#262626","#e50914","#ff7a45"]}};
+/* ===== FIREBASE: paste your config from Firebase console. Leave apiKey empty = local-only mode ===== */
+const FIREBASE_CONFIG={apiKey:"AIzaSyAHTfI8R3DSzD3E53nukZuS1muB4WUZ8m4",authDomain:"anime-movies-d9381.firebaseapp.com",projectId:"anime-movies-d9381",storageBucket:"anime-movies-d9381.firebasestorage.app",messagingSenderId:"883975261498",appId:"1:883975261498:web:818386f068910a6df59403"};
+const FIREBASE_LOGIN=true; // true = admin must also sign in with a Firebase email/password (secure); false = admin code only
+const fbOn=!!(FIREBASE_CONFIG.apiKey&&window.firebase);let fs,fbAuth,synced={},fbE=0;
+if(fbOn){firebase.initializeApp(FIREBASE_CONFIG);fs=firebase.firestore();fbAuth=firebase.auth()}
+const fbErr=e=>{if(Date.now()-fbE>3000){fbE=Date.now();alert("Online save failed: "+e.message+"\nCheck your Firestore rules.")}};
+/* ===== HELPERS ===== */
+const $=s=>document.querySelector(s),uid=()=>Math.random().toString(36).slice(2,9),
+esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])),
+cnt=r=>r.reduce((a,b)=>a+b,0),
+calculateAverageRating=r=>cnt(r)?r.reduce((a,v,i)=>a+v*(i+1),0)/cnt(r):0,
+art=(t,w,h)=>{const n=[...t].reduce((a,c)=>a+c.charCodeAt(0),0)%360;return"data:image/svg+xml,"+encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="hsl(${n} 70% 45%)"/><stop offset="1" stop-color="hsl(${(n+70)%360} 70% 16%)"/></linearGradient></defs><rect width="100%" height="100%" fill="url(#g)"/><text x="50%" y="58%" fill="#fff" fill-opacity=".8" font-size="${w/3}" font-family="Georgia,serif" font-weight="700" text-anchor="middle">${esc(t[0]||"?")}</text></svg>`).replace(/[!'()*]/g,c=>"%"+c.charCodeAt(0).toString(16))},
+poster=x=>x.poster||art(x.title,300,450),back=x=>x.backdrop||art(x.title,1200,500),
+item=id=>db.items.find(x=>x.id==id),season=(i,j)=>item(i).seasons.find(s=>s.id==j),
+okUrl=u=>/^https?:\/\//i.test(u)||alert("Enter a full link starting with https://");
+/* ===== DATABASE (localStorage now; swap these two functions for a backend later) ===== */
+function seed(){const n=Date.now(),U="https://www.mediafire.com/?DEMO_REPLACE_WITH_YOUR_LINK",T=["The Beginning","A Rival Appears","The Hidden Door","Night Race","The Final Kite"],
+ss=(k,q)=>[1,2].map(s=>({id:uid(),num:s,name:"",eps:Array.from({length:k},(_,i)=>({id:uid(),num:i+1,title:T[i%5],desc:"Demo episode: replace with your own.",quality:q,size:"450 MB",url:U}))})),
+mk=(type,i,o)=>({id:uid(),type,created:n-i*6e4,poster:"",backdrop:"",year:2025,featured:false,trending:false,releaseAt:0,chars:"",seasons:[],downloads:[],...o}),
+dl=[{quality:"720p",size:"1.2 GB",url:U},{quality:"1080p",size:"2.5 GB",url:U}];
+return{settings:{name:SITE_NAME,desc:"Authorized anime and cartoon downloads",logo:"",banner:"",copy:"© 2026 "+SITE_NAME+". All rights reserved.",contact:"contact@example.com",social:"",heroId:"",accent:"#ffb938",maintenance:false,xg:"",xl:"",codeHash:"",idleMin:15,tpl:"classic",tplPick:true,anim:{...ANIM_DEF}},
+announcements:[{id:uid(),text:"🔥 New Cartoon Episodes Added! (demo)",on:true}],
+items:[mk("cartoon",0,{title:"Star Pups Academy",desc:"Rookie puppies train to become space rescuers. DEMO content.",lang:"English",genres:["Kids","Adventure","Family"],status:"Ongoing",featured:true,trending:true,chars:"Milo, Zuzu",seasons:ss(4,"720p"),ratings:[2,3,10,31,56]}),
+mk("cartoon",1,{title:"Dragon Kite Saga",desc:"A kite maker bonds with a sky dragon. DEMO content.",lang:"Japanese",genres:["Action","Fantasy"],status:"Completed",year:2024,trending:true,chars:"Ren, Haku",seasons:ss(3,"1080p"),ratings:[1,2,8,20,30]}),
+mk("cartoon",2,{title:"Chhota Rocket",desc:"A tiny inventor builds giant gadgets. DEMO content.",lang:"Hindi",genres:["Comedy","Sci-Fi","Kids"],status:"Ongoing",year:2023,chars:"Rocket, Dadi",seasons:ss(3,"480p"),ratings:[0,1,5,12,9]}),
+mk("movie",0,{title:"Moonlight Mango",desc:"A village child finds a glowing mango tree. DEMO content.",lang:"Telugu",genres:["Family","Fantasy"],runtime:"1h 45m",featured:true,chars:"Chinnu",downloads:dl,ratings:[0,1,4,15,25]}),
+mk("movie",1,{title:"Robo Kitchen",desc:"Robot chefs run the galaxy's best diner. DEMO content.",lang:"English",genres:["Sci-Fi","Comedy"],runtime:"1h 30m",year:2024,chars:"Chef Bolt",downloads:dl,ratings:[1,1,6,10,14]})]}}
+function loadDatabase(){if(fbOn)return{settings:seed().settings,announcements:[],items:[]};try{const d=JSON.parse(localStorage.getItem(KEY));if(d&&d.items)return d}catch(e){}return seed()}
+function saveDatabase(){if(fbOn)return fbSave();try{localStorage.setItem(KEY,JSON.stringify(db))}catch(e){alert("Could not save: browser storage is unavailable or full.")}}
+let db=loadDatabase(),tab="Dashboard",newIds=new Set(),sel=new Set();
+function refresh(){renderHome();revealInit();fillFilters();performSearch();if($("#adm").classList.contains("on"))renderAdminDashboard()}
+function commit(){saveDatabase();refresh();if($("#adm").classList.contains("on"))toast("Saved ✓")}
+/* Firebase sync: writes only what changed, listens live so every visitor sees updates */
+function fbSave(){const w=(col,list)=>{list.forEach(o=>{const j=JSON.stringify(o),k=col+o.id;if(synced[k]!==j){synced[k]=j;fs.collection(col).doc(o.id).set(o).catch(fbErr)}});
+Object.keys(synced).filter(k=>k.startsWith(col)&&!list.some(o=>k==col+o.id)).forEach(k=>{delete synced[k];fs.collection(col).doc(k.slice(col.length)).delete().catch(fbErr)})};
+w("items",db.items);w("announcements",db.announcements);w("reports",db.reports||[]);const j=JSON.stringify(db.settings);if(synced.settings!==j&&(!FIREBASE_LOGIN||fbAuth.currentUser)){synced.settings=j;fs.doc("meta/settings").set(db.settings).catch(fbErr)}}
+function fbListen(){const on=(col,key)=>fs.collection(col).onSnapshot(q=>{db[key]=q.docs.map(d=>{const o={...d.data(),id:d.id};synced[col+d.id]=JSON.stringify(o);return o});refresh();if(key=="items")readyOnce()},e=>{$("#res").innerHTML='<p class="empty">Could not load the online database: '+esc(e.message)+"</p>";readyOnce()});
+on("items","items");on("announcements","announcements");on("reports","reports");
+fs.doc("meta/settings").onSnapshot(d=>{if(d.exists){db.settings={...db.settings,...d.data()};synced.settings=JSON.stringify(db.settings);refresh()}})}
+/* ===== PUBLIC SITE ===== */
+const card=x=>{const soon=x.releaseAt>Date.now();return`<button class="card" data-a="open" data-i="${x.id}"><img loading="lazy" src="${esc(poster(x))}" alt="Poster of ${esc(x.title)}">${soon?'<span class="badge">⏳ SOON</span>':newIds.has(x.id)?'<span class="badge">🆕 LATEST</span>':""}<div class="b"><b>${esc(x.title)}</b><small>${x.year} • ${esc(x.lang)}</small><small>${esc(x.genres.join(", "))}</small><small>⭐ ${calculateAverageRating(x.ratings).toFixed(1)}</small></div></button>`},
+row=(id,t,l)=>l.length?`<section class="sec" id="${id}"><h2>${t}</h2><div class="scroll">${l.map(card).join("")}</div></section>`:"";
+const vis=()=>db.items.filter(x=>!x.hidden),by=t=>vis().filter(x=>x.type==t).sort((a,b)=>b.created-a.created);
+function renderLatest(){return row("latest","🔥 LATEST CARTOONS",by("cartoon").slice(0,10))}
+function renderAnime(){return row("anime","🌸 LATEST ANIME",by("anime").slice(0,10))}
+function renderMovies(){return row("latestm","🎬 LATEST MOVIES",by("movie").slice(0,10))}
+function renderTrending(){return row("trend","🔥 TRENDING NOW",vis().filter(x=>x.trending))}
+function renderFeatured(){return row("feat","⭐ FEATURED",vis().filter(x=>x.featured))}
+function renderTopRated(){return row("toprated","🏆 TOP RATED",vis().filter(x=>cnt(x.ratings)).sort((a,b)=>calculateAverageRating(b.ratings)-calculateAverageRating(a.ratings)||cnt(b.ratings)-cnt(a.ratings)).slice(0,10))}
+function renderHome(){const s=db.settings;applyLook();document.body.classList.toggle("maint",!!s.maintenance);newIds=new Set([...by("cartoon").slice(0,3),...by("anime").slice(0,3),...by("movie").slice(0,3)].map(x=>x.id));
+$("#logo").innerHTML=(s.logo?`<img src="${esc(s.logo)}" alt="" height="28"> `:"")+esc(s.name);document.title=s.name;
+$("#ann").innerHTML=festBanner()+db.announcements.filter(a=>a.on).map(a=>`<div class="ann">${esc(a.text)}</div>`).join("");
+const h=item(s.heroId)||vis().filter(x=>x.featured)[0]||by("cartoon")[0]||by("anime")[0]||by("movie")[0];
+$("#hero").innerHTML=h?`<img class="bgimg" src="${esc(s.banner||back(h))}" alt=""><img class="pp" src="${esc(poster(h))}" alt="Poster of ${esc(h.title)}"><div><h1>${esc(h.title)}</h1><p class="mu">${h.year} • ${esc(h.lang)} • ${esc(h.genres.join(", "))} • ⭐ ${calculateAverageRating(h.ratings).toFixed(1)} / 5</p><p>${esc(h.desc)}</p><div class="acts"><button class="pri" data-a="open" data-i="${h.id}">VIEW DETAILS</button><button data-a="go" data-i="browse">EXPLORE</button></div></div>`:"";
+$("#rows").innerHTML=renderSchedule()+renderLatest()+renderAnime()+renderMovies()+renderTrending()+renderFeatured()+renderTopRated()+`<section class="sec" id="cats"><h2>Categories</h2><div class="chips">${gl().map(g=>`<button data-a="cat" data-i="${g}">${g}</button>`).join("")}</div></section>`;
+$("#foot").innerHTML=`<h3>Copyright Disclaimer</h3><p>This website is intended only for content that the website owner has the legal rights, licenses, permissions, or other lawful authorization to distribute.</p><p>We do not support or encourage copyright infringement.</p><p>All trademarks, characters, names, logos, and copyrighted works belong to their respective owners.</p><p>Download buttons may redirect users to third-party file-hosting services such as MediaFire.</p><p>If you believe content is being distributed without authorization, please contact the website administrator.</p><p>${esc(s.desc)}</p><p>${esc(s.copy)} ${esc(s.contact)}</p><p>${s.social.split("\n").map(u=>u.trim()).filter(Boolean).map(u=>/^https?:/i.test(u)?`<a href="${esc(u)}" target="_blank" rel="noopener">${esc(u.replace(/^https?:\/\/(www\.)?/i,""))}</a>`:esc(u)).join("")}</p>`}
+function fillFilters(){const f=(id,all,l)=>{const e=$(id),v=e.value;e.innerHTML=`<option value="">${all}</option>`+l.map(o=>Array.isArray(o)?`<option value="${o[0]}">${o[1]}</option>`:`<option>${o}</option>`).join("");e.value=v};
+f("#fl","All languages",ll());f("#fg","All genres",gl());f("#fy","All years",[...new Set(db.items.map(x=>x.year))].sort((a,b)=>b-a));f("#fty","Cartoons & movies",[["cartoon","Cartoons"],["anime","Anime"],["movie","Movies"]])}
+function performSearch(){const q=$("#q").value.toLowerCase().trim(),[l,g,y,t]=["#fl","#fg","#fy","#fty"].map(s=>$(s).value);
+const r=vis().filter(x=>(!l||x.lang==l)&&(!g||x.genres.includes(g))&&(!y||x.year==y)&&(!t||x.type==t)&&(!q||[x.title,x.chars,x.lang,x.year,x.genres.join(" ")].join(" ").toLowerCase().includes(q))).sort((a,b)=>b.created-a.created);
+$("#res").innerHTML=r.map(card).join("")||'<p class="empty">No results found.</p>'}
+function go(i,j){$("#nav").classList.remove("open");if(i=="home")return scrollTo({top:0,behavior:"smooth"});if(j){$("#fty").value=j;performSearch()}($("#"+i)||$("#browse")).scrollIntoView({behavior:"smooth"})}
+/* ===== DETAILS, RATINGS, DOWNLOADS ===== */
+function ratingHTML(x){const r=x.ratings,t=cnt(r),mine=+localStorage.getItem(`ratingGiven_${x.type}_${x.id}`)||0;
+return`<p><b>⭐ ${calculateAverageRating(r).toFixed(1)} / 5</b> • ${t} Ratings</p><div class="stars">${[1,2,3,4,5].map(n=>`<button data-a="rate" data-i="${x.id}" data-j="${n}" aria-label="${n} star${n>1?"s":""}">${n<=mine?"★":"☆"}</button>`).join("")}</div>`+[5,4,3,2,1].map(n=>`<div class="br"><span>${n} ⭐</span><div class="bar"><i style="width:${t?r[n-1]/t*100:0}%"></i></div><b>${t?Math.round(r[n-1]/t*100):0}%</b></div>`).join("")}
+function openTitle(id){const x=item(id);if(!x)return;const c=x.type!="movie",wait=x.releaseAt>Date.now(),ne=c?x.seasons.reduce((a,s)=>a+s.eps.length,0):0,
+info=(q,s)=>`<small>${esc(q)} • ${esc(s)} • ${esc(x.lang)}</small>`,dis=wait?"disabled":"";
+const body=c?(x.seasons.length?x.seasons.sort((a,b)=>a.num-b.num).map(s=>`<details><summary>Season ${s.num}${s.name?" — "+esc(s.name):""} (${s.eps.length} episodes)</summary>${s.eps.map(e=>`<div class="ep"><div><b>Episode ${String(e.num).padStart(2,"0")} — ${esc(e.title)}</b><small>${esc(e.desc)}</small>${info(e.quality,e.size)}</div><button class="pri" data-a="dle" data-i="${x.id}" data-j="${s.id}" data-k="${e.id}" ${dis}>DOWNLOAD</button></div>`).join("")||'<p class="mu">No episodes yet.</p>'}</details>`).join(""):'<p class="mu">No seasons yet.</p>'):
+(x.downloads.map((d,n)=>`<div class="ep"><div>${info(d.quality,d.size)}</div><button class="pri" data-a="dlm" data-i="${x.id}" data-j="${n}" ${dis}>DOWNLOAD</button></div>`).join("")||'<p class="mu">No download links yet.</p>');
+$("#dbx").innerHTML=`<button class="x" data-a="close" aria-label="Close">✕</button><img class="ban" src="${esc(back(x))}" alt=""><div class="dh"><img class="pp" src="${esc(poster(x))}" alt="Poster of ${esc(x.title)}"><div><h2>${esc(x.title)}</h2><p class="mu">${x.year} • ${esc(x.lang)} • ${esc(x.genres.join(", "))} • ${c?esc(x.status):esc(x.runtime||"")}</p><p>${esc(x.desc)}</p>${c?`<p class="mu">${x.seasons.length} seasons • ${ne} episodes</p>`:""}${wait?`<p class="cd">⏳ Releases in <b data-t="${x.releaseAt}"></b></p>`:""}</div></div><h3>${c?"Seasons":"Download options"}</h3>${body}<h3>⭐ RATE THIS ${x.type=="anime"?"ANIME":c?"CARTOON":"MOVIE"}</h3><div id="rt">${ratingHTML(x)}</div><p id="rm" role="status"></p><button class="sm" data-a="rep" data-i="${x.id}">⚠ Report a broken link</button>`;
+$("#dm").classList.add("on")}
+function submitRating(id,n){const x=item(id),k=`ratingGiven_${x.type}_${id}`;if(localStorage.getItem(k)){$("#rm").textContent="You have already rated this title.";return}
+const done=()=>{localStorage.setItem(k,n);$("#rt").innerHTML=ratingHTML(item(id));$("#rm").textContent="Thanks for rating!";renderHome()};
+if(fbOn){const r=fs.collection("items").doc(id);fs.runTransaction(async t=>{const a=(await t.get(r)).data().ratings;a[n-1]++;t.update(r,{ratings:a})}).then(()=>{x.ratings[n-1]++;done()}).catch(fbErr);return}
+x.ratings[n-1]++;saveDatabase();done()}
+function bump(id){if(fbOn)fs.collection("items").doc(id).update({dl:firebase.firestore.FieldValue.increment(1)}).catch(()=>{});else{const x=item(id);x.dl=(x.dl||0)+1;saveDatabase()}}
+function downloadEpisode(i,j,k){const x=item(i);if(x.releaseAt>Date.now())return alert("Not released yet.");bump(i);window.open(season(i,j).eps.find(e=>e.id==k).url,"_blank","noopener")}
+function downloadMovie(i,j){const x=item(i);if(x.releaseAt>Date.now())return alert("Not released yet.");bump(i);window.open(x.downloads[j].url,"_blank","noopener")}
+setInterval(()=>document.querySelectorAll("[data-t]").forEach(e=>{const d=+e.dataset.t-Date.now();e.textContent=d>0?`${Math.floor(d/864e5)}d ${Math.floor(d%864e5/36e5)}h ${Math.floor(d%36e5/6e4)}m ${Math.floor(d%6e4/1e3)}s`:"Available now. Reopen to download."}),1000);
+/* ===== ADMIN ===== */
+function openAdminLogin(){$("#lc").value="";$("#le").textContent="";$("#lg").classList.add("on");$("#lc").focus()}
+async function sha(t){try{const b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode("vaw:"+t));return[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join("")}catch(e){return"p:"+t}}
+async function verifyAdmin(){const lk=+localStorage.getItem("admLock")||0;if(lk>Date.now())return $("#le").textContent="Too many wrong tries. Wait "+Math.ceil((lk-Date.now())/6e4)+" min.";
+const v=$("#lc").value,h=db.settings.codeHash,ok=h?await sha(v)===h:v===ADMIN_CODE;
+if(!ok){const n=(+localStorage.getItem("admTry")||0)+1;localStorage.setItem("admTry",n);if(n>=5){localStorage.setItem("admLock",Date.now()+6e5);localStorage.setItem("admTry",0)}return $("#le").textContent="Incorrect Admin Code"}
+localStorage.setItem("admTry",0);$("#lg").classList.remove("on");
+if(fbOn&&FIREBASE_LOGIN&&!fbAuth.currentUser)ask("Admin sign in (Firebase)",[["email","Admin email","email"],["pw","Password","password"]],{},v=>{fbAuth.signInWithEmailAndPassword(v.email,v.pw).then(openAdminPanel).catch(e=>alert("Sign in failed: "+e.message))});else openAdminPanel()}
+function bulkEpisodes(i,j){const s=season(i,j);ask("Bulk add episodes",[["lines","One episode per line:  Title | Quality | Size | MediaFire URL","textarea"]],{lines:""},v=>{let n=s.eps.reduce((a,e)=>Math.max(a,e.num),0),bad=0;
+v.lines.split("\n").map(l=>l.trim()).filter(Boolean).forEach(l=>{const[t,q,z,u]=l.split("|").map(p=>p.trim());if(!/^https?:\/\//i.test(u||"")){bad++;return}s.eps.push({id:uid(),num:++n,title:t||"Episode "+n,desc:"",quality:q||"720p",size:z||"",url:u})});
+if(bad)alert(bad+" line(s) skipped: each needs 4 parts and a https:// link at the end.");commit()})}
+function openAdminPanel(){$("#adm").classList.add("on");renderAdminDashboard();armIdle();watchVisits()}
+function closeAdmin(){$("#adm").classList.remove("on");stopVisits()}
+const b=(a,i,j,k,l,c="")=>`<button class="sm ${c}" data-a="${a}" data-i="${i??""}" data-j="${j??""}" data-k="${k??""}">${l}</button>`;
+const CF=[["title","Title","text"],["poster","Poster URL (blank = placeholder)","text"],["backdrop","Backdrop URL","text"],["desc","Description","textarea"],["year","Release year","number"],["lang","Language","select",ll],["genres","Genres","multi",gl],["chars","Characters (comma separated)","text"],["status","Status","select",["Ongoing","Completed","Upcoming"]],["releaseAt","Release time (optional, shows a countdown)","datetime"],["featured","Featured","check"],["trending","Trending","check"],["hidden","Hidden from visitors (draft)","check"]],
+MF=[...CF.filter(f=>f[0]!="status"),["runtime","Runtime (e.g. 1h 45m)","text"]],SF=[["num","Season number","number"],["name","Season name","text"]],
+EF=[["num","Episode number","number"],["title","Episode title","text"],["desc","Description","textarea"],["quality","Quality","select",QUAL],["size","File size (e.g. 450 MB)","text"],["url","MediaFire URL","url"]],
+DF=[["quality","Quality","select",QUAL],["size","File size (e.g. 1.2 GB)","text"],["url","MediaFire URL","url"]],
+AF=[["text","Announcement","text"],["on","Show on homepage","check"]],
+STF=[["name","Website name","text"],["desc","Website description","text"],["logo","Logo URL","text"],["banner","Hero banner image URL","text"],["copy","Copyright text","text"],["contact","Contact information","text"],["social","Social links (one per line)","textarea"],["xg","Extra genres (comma separated)","text"],["xl","Extra languages (comma separated)","text"],["accent","Accent color (leave #ffb938 to follow the template colour)","color"],["maintenance","Maintenance mode (hides the site from visitors)","check"]];
+function ask(title,F,v,cb){$("#fb").innerHTML=`<h3>${title}</h3><form id="f">${F.map(([k,l,t,o])=>{if(typeof o=="function")o=o();const val=v[k];
+if(t=="multi")return`<fieldset><legend>${l}</legend>${o.map(x=>`<label class="ck"><input type="checkbox" name="${k}" value="${x}" ${(val||[]).includes(x)?"checked":""}> ${x}</label>`).join("")}</fieldset>`;
+if(t=="check")return`<label class="ck"><input type="checkbox" name="${k}" ${val?"checked":""}> ${l}</label>`;
+const rq=["title","text","url"].includes(k)?"required":"";let c;
+if(t=="textarea")c=`<textarea name="${k}" rows="3">${esc(val)}</textarea>`;
+else if(t=="select")c=`<select name="${k}">${o.map(x=>`<option ${x==val?"selected":""}>${x}</option>`).join("")}</select>`;
+else if(t=="datetime")c=`<input type="datetime-local" name="${k}" value="${val?new Date(val-new Date().getTimezoneOffset()*6e4).toISOString().slice(0,16):""}">`;
+else c=`<input type="${t}" name="${k}" value="${esc(val)}" ${rq}>`;
+return`<label>${l}${c}</label>`}).join("")}<div class="acts"><button class="pri">Save</button><button type="button" data-a="closeF">Cancel</button></div></form>`;
+$("#fm").classList.add("on");
+$("#f").onsubmit=e=>{e.preventDefault();const d=new FormData(e.target),r={};
+F.forEach(([k,,t])=>{r[k]=t=="multi"?d.getAll(k):t=="check"?d.has(k):t=="number"?+d.get(k):t=="datetime"?(d.get(k)?new Date(d.get(k)).getTime():0):d.get(k).trim()});
+if(cb(r)!==false)$("#fm").classList.remove("on")}}
+function addContent(type){ask("Add "+type,type=="movie"?MF:CF,{year:new Date().getFullYear(),lang:"English",genres:[],status:"Ongoing"},v=>{db.items.push({id:uid(),type,created:Date.now(),seasons:[],downloads:[],ratings:[0,0,0,0,0],...v});commit()})}
+function editContent(i){const x=item(i);ask("Edit "+esc(x.title),x.type=="movie"?MF:CF,x,v=>{Object.assign(x,v);commit()})}
+function deleteContent(i){const x=item(i);if(confirm(`Delete "${x.title}" and everything inside it? This cannot be undone.`)){db.items=db.items.filter(y=>y.id!=i);commit()}}
+function toggle(i,k){const x=item(i);x[k]=!x[k];commit()}
+function addSeason(i){const c=item(i);ask("Add season",SF,{num:c.seasons.length+1,name:""},v=>{c.seasons.push({id:uid(),eps:[],...v});commit()})}
+function editSeason(i,j){const s=season(i,j);ask("Edit season",SF,s,v=>{Object.assign(s,v);commit()})}
+function deleteSeason(i,j){if(confirm("Delete this season and its episodes?")){const c=item(i);c.seasons=c.seasons.filter(s=>s.id!=j);commit()}}
+function addEpisode(i,j){const s=season(i,j);ask("Add episode",EF,{num:s.eps.length+1,quality:"720p"},v=>{if(!okUrl(v.url))return false;s.eps.push({id:uid(),...v});s.eps.sort((a,b)=>a.num-b.num);commit()})}
+function editEpisode(i,j,k){const e=season(i,j).eps.find(x=>x.id==k);ask("Edit episode",EF,e,v=>{if(!okUrl(v.url))return false;Object.assign(e,v);commit()})}
+function deleteEpisode(i,j,k){if(confirm("Delete this episode?")){const s=season(i,j);s.eps=s.eps.filter(e=>e.id!=k);commit()}}
+function addDownload(i){const m=item(i);ask("Add download option",DF,{quality:"720p"},v=>{if(!okUrl(v.url))return false;m.downloads.push(v);commit()})}
+function editDownload(i,j){const d=item(i).downloads[j];ask("Edit download option",DF,d,v=>{if(!okUrl(v.url))return false;Object.assign(d,v);commit()})}
+function deleteDownload(i,j){if(confirm("Delete this download option?")){item(i).downloads.splice(j,1);commit()}}
+function resetRating(i){const x=item(i);if(confirm(`Reset all ratings for "${x.title}"?`)){x.ratings=[0,0,0,0,0];localStorage.removeItem(`ratingGiven_${x.type}_${x.id}`);commit()}}
+function resetAllRatings(){if(confirm("Reset ALL ratings for every title?")){db.items.forEach(x=>{x.ratings=[0,0,0,0,0];localStorage.removeItem(`ratingGiven_${x.type}_${x.id}`)});commit()}}
+function exportData(){const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(db,null,2)],{type:"application/json"}));a.download="anime-world-backup-"+new Date().toISOString().slice(0,10)+".json";a.click()}
+function importData(file){const r=new FileReader();r.onload=()=>{try{const d=JSON.parse(r.result);if(!Array.isArray(d.items)||!d.settings||!Array.isArray(d.announcements))throw 0;if(confirm("Replace ALL current data with this backup?")){db=d;commit();alert("Data restored.")}}catch(e){alert("That file is not a valid backup.")}$("#imp").value=""};r.readAsText(file)}
+function resetDemo(){if(confirm("Reset to the original demo data? All your changes will be lost"+(fbOn?" for ALL visitors":"")+".")){db=seed();commit()}}
+function gl(){return[...GENRES.filter(g=>g!="Other"),...(db.settings.xg||"").split(",").map(x=>x.trim()).filter(Boolean),"Other"]}
+function ll(){return[...LANGS.filter(g=>g!="Other"),...(db.settings.xl||"").split(",").map(x=>x.trim()).filter(Boolean),"Other"]}
+function selectAll(){const t=tab=="Anime"?"anime":tab=="Movies"?"movie":"cartoon",q=$("#aq").value.toLowerCase();db.items.filter(x=>x.type==t&&x.title.toLowerCase().includes(q)).forEach(x=>sel.add(x.id));renderAdminDashboard()}
+function bulkAction(op){const l=db.items.filter(x=>sel.has(x.id));if(!l.length)return alert("Tick some titles first.");
+if(op=="del"){if(!confirm(`Delete ${l.length} title(s)? This cannot be undone.`))return;db.items=db.items.filter(x=>!sel.has(x.id))}
+else l.forEach(x=>{const[k,v]={feat:["featured",1],unfeat:["featured",0],trend:["trending",1],untrend:["trending",0],hide:["hidden",1],show:["hidden",0]}[op];x[k]=!!v});sel.clear();commit()}
+function duplicateContent(i){const c=JSON.parse(JSON.stringify(item(i)));c.id=uid();c.created=Date.now();c.title+=" (copy)";c.hidden=true;c.ratings=[0,0,0,0,0];c.dl=0;(c.seasons||[]).forEach(z=>{z.id=uid();z.eps.forEach(e=>e.id=uid())});db.items.push(c);commit()}
+function setRatings(i){const x=item(i);ask("Set rating counts: "+esc(x.title),[1,2,3,4,5].map(n=>["r"+n,n+" star votes","number"]),Object.fromEntries(x.ratings.map((n,k)=>["r"+(k+1),n])),v=>{x.ratings=[v.r1,v.r2,v.r3,v.r4,v.r5].map(n=>Math.max(0,Math.round(n)||0));commit()})}
+function reportLink(i){const x=item(i);if(localStorage.getItem("rep_"+i))return alert("You already reported this title. Thank you!");(db.reports=db.reports||[]).push({id:uid(),itemId:i,title:x.title,created:Date.now()});localStorage.setItem("rep_"+i,1);saveDatabase();alert("Thanks! The admin has been told.")}
+function bulkDownloads(i){const m=item(i);ask("Bulk add downloads",[["lines","One per line:  Quality | Size | MediaFire URL","textarea"]],{lines:""},v=>{let bad=0;v.lines.split("\n").map(l=>l.trim()).filter(Boolean).forEach(l=>{const[q,z,u]=l.split("|").map(p=>p.trim());if(!/^https?:\/\//i.test(u||"")){bad++;return}m.downloads.push({quality:q||"720p",size:z||"",url:u})});if(bad)alert(bad+" line(s) skipped: need Quality | Size | https:// link.");commit()})}
+function exportLinks(){const R=[["Type","Title","Season","Episode","Quality","Size","URL"]];db.items.forEach(x=>x.type=="movie"?(x.downloads||[]).forEach(d=>R.push([x.type,x.title,"","",d.quality,d.size,d.url])):x.seasons.forEach(z=>z.eps.forEach(e=>R.push([x.type,x.title,z.num,e.num,e.quality,e.size,e.url]))));
+const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([R.map(r=>r.map(c=>'"'+String(c).replace(/"/g,'""')+'"').join(",")).join("\n")],{type:"text/csv"}));a.download="anime-world-links.csv";a.click()}
+let idleT;
+function armIdle(){clearTimeout(idleT);const m=db.settings.idleMin??15;if(!m||!$("#adm").classList.contains("on"))return;idleT=setTimeout(()=>{closeAdmin();if(fbOn&&FIREBASE_LOGIN)fbAuth.signOut()},m*6e4)}
+function securitySettings(){ask("Security settings",[["code","New admin code (min 4 characters; blank = keep current)","password"],["code2","Repeat new admin code","password"],["idle","Auto sign-out after minutes with no activity (0 = off)","number"]],{idle:db.settings.idleMin??15},v=>{
+if(v.code!==v.code2){alert("The two codes do not match.");return false}if(v.code&&v.code.length<4){alert("The admin code needs at least 4 characters.");return false}
+(async()=>{if(v.code)db.settings.codeHash=await sha(v.code);db.settings.idleMin=Math.max(0,v.idle||0);commit();armIdle();alert("Security settings saved.")})()})}
+function renderAdminDashboard(){const C=db.items.filter(x=>x.type!="movie"),M=db.items.filter(x=>x.type=="movie"),T=["Dashboard","Visitors","Cartoons","Anime","Movies","Schedule","Ratings","Reports","Announcements","Animations","Templates","Festivals","Settings","Security","Backup"],aq=$("#aq").value.toLowerCase(),mine=t=>db.items.filter(x=>x.type==t&&x.title.toLowerCase().includes(aq)).sort((a,b)=>b.created-a.created),
+sn=C.reduce((a,c)=>a+c.seasons.length,0),ep=C.reduce((a,c)=>a+c.seasons.reduce((z,s)=>z+s.eps.length,0),0),
+st=(n,l)=>`<div><b>${n}</b>${l}</div>`;
+$("#aq").style.display=["Cartoons","Anime","Movies"].includes(tab)?"":"none";$("#tabs").innerHTML=T.map(t=>`<button class="${t==tab?"on":""}" data-a="tab" data-i="${t}">${t}</button>`).join("");
+let h='<p class="note">IMPORTANT: Only upload or link to content that you have the legal right or permission to distribute.</p>';
+if(tab=="Dashboard")h+=`<h3>Visitors</h3><div id="vis">${visitsHTML()}</div>`;
+if(tab=="Visitors")h+=`<div id="vis">${visitsHTML(1)}</div>`;
+if(tab=="Animations")h+=animHTML();
+if(tab=="Schedule")h+=schedAdminHTML();
+if(tab=="Templates")h+=tplHTML();
+if(tab=="Festivals")h+=festHTML();
+if(tab=="Dashboard")h+=`<div class="stats">${st(C.filter(x=>x.type=="cartoon").length,"Total Cartoons")+st(C.filter(x=>x.type=="anime").length,"Total Anime")+st(M.length,"Total Movies")+st(sn,"Total Seasons")+st(ep,"Total Episodes")+st(db.items.reduce((a,x)=>a+cnt(x.ratings),0),"Total Ratings")+st(ep+M.reduce((a,m)=>a+m.downloads.length,0),"Total Download Links")+st(db.items.reduce((a,x)=>a+(x.dl||0),0),"Download Clicks")}</div>`;
+if(tab=="Dashboard")h+=`<p>${fbOn?"☁️ Online database connected: every visitor sees your changes.":"💾 Local-only mode: paste your Firebase config to go online."}</p>`+(fbOn&&FIREBASE_LOGIN?b("out","","","","Sign out of admin"):"")+"<h3>Most downloaded</h3>"+[...db.items].sort((p,q)=>(q.dl||0)-(p.dl||0)).slice(0,5).map(x=>`<div class="sub2">${esc(x.title)} • ${x.dl||0} downloads</div>`).join("");
+if(tab=="Dashboard"){const wr=db.items.map(x=>{const u=x.type=="movie"?x.downloads||[]:x.seasons.flatMap(z=>z.eps),w=[];if(!u.length)w.push("no download links");if(u.some(e=>/DEMO/.test(e.url)))w.push("demo links");else if(u.some(e=>!/mediafire\.com/i.test(e.url)))w.push("non-MediaFire link");return w.length?`<div class="sub2">⚠ ${esc(x.title)}: ${w.join(", ")}</div>`:""}).join("");
+h+="<h3>Needs attention</h3>"+(wr||'<p class="mu">Every title has links.</p>')+`<p class="mu">Hidden drafts: ${db.items.filter(x=>x.hidden).length} • Open broken-link reports: ${(db.reports||[]).length}</p>`}
+const bar='<div class="row">'+b("pall","","","","☑ Select all")+[["feat","Feature"],["unfeat","Unfeature"],["trend","Trend"],["untrend","Untrend"],["hide","Hide"],["show","Show"],["del","Delete"]].map(([o,l])=>b("bk",o,"","",l,o=="del"?"dan":"")).join("")+"</div>";
+const top=x=>`<input type="checkbox" data-a="pick" data-i="${x.id}" ${sel.has(x.id)?"checked":""} aria-label="Select ${esc(x.title)}" style="width:auto"> <b>${esc(x.title)}</b> ${b("dup",x.id,0,0,"Duplicate")}${b("ed",x.id,0,0,"Edit")}${b("del",x.id,0,0,"Delete","dan")}${b("ft",x.id,0,0,x.featured?"★ Featured ON":"☆ Featured OFF")}${b("tr",x.id,0,0,x.trending?"🔥 Trending ON":"Trending OFF")}${b("hero",x.id,0,0,"Set as hero")}${b("hd",x.id,0,0,x.hidden?"🙈 Hidden":"👁 Visible")} <small>${x.dl||0} downloads</small>`;
+if(tab=="Cartoons"||tab=="Anime")h+=bar+b(tab=="Anime"?"addA":"addC","","","","+ Add "+(tab=="Anime"?"anime":"cartoon"),"pri")+mine(tab=="Anime"?"anime":"cartoon").map(c=>`<div class="row">${top(c)}${b("addS",c.id,0,0,"+ Season")}${c.releaseAt>Date.now()?'<small>⏳ Release countdown active</small>':""}`+c.seasons.map(s=>`<div class="sub"><b>Season ${s.num} ${esc(s.name)}</b> ${b("edS",c.id,s.id,0,"Edit")}${b("delS",c.id,s.id,0,"Delete","dan")}${b("addE",c.id,s.id,0,"+ Episode")}${b("bulk",c.id,s.id,0,"+ Bulk episodes")}`+s.eps.map(e=>`<div class="sub2">E${e.num} ${esc(e.title)} • ${esc(e.quality)} • ${esc(e.size)} ${b("edE",c.id,s.id,e.id,"Edit")}${b("delE",c.id,s.id,e.id,"Delete","dan")}</div>`).join("")+"</div>").join("")+"</div>").join("")||"";
+if(tab=="Movies")h+=bar+b("addM","","","","+ Add movie","pri")+mine("movie").map(m=>`<div class="row">${top(m)}${b("addD",m.id,0,0,"+ Download")}${b("bulkD",m.id,0,0,"+ Bulk downloads")}`+m.downloads.map((d,n)=>`<div class="sub2">${esc(d.quality)} • ${esc(d.size)} ${b("edD",m.id,n,0,"Edit")}${b("delD",m.id,n,0,"Delete","dan")}</div>`).join("")+"</div>").join("");
+if(tab=="Ratings")h+=b("rall","","","","Reset all ratings","dan")+`<div class="tw"><table><tr><th>Title<th>Average<th>Total<th>1★<th>2★<th>3★<th>4★<th>5★<th></tr>${db.items.map(x=>`<tr><td>${esc(x.title)}<td>${calculateAverageRating(x.ratings).toFixed(1)}<td>${cnt(x.ratings)}${x.ratings.map(n=>`<td>${n}`).join("")}<td>${b("sr",x.id,0,0,"Set counts")}${b("rr",x.id,0,0,"Reset","dan")}`).join("")}</table></div>`;
+if(tab=="Reports")h+=(db.reports||[]).sort((a,z)=>z.created-a.created).map(r=>`<div class="row">⚠ ${esc(r.title)} <small>${new Date(r.created).toLocaleString()}</small>${item(r.itemId)?b("ed",r.itemId,0,0,"Edit title"):""}${b("rs",r.id,0,0,"Mark fixed","pri")}</div>`).join("")||'<p class="mu">No broken-link reports.</p>';
+if(tab=="Security")h+=`<p>Status: <b>${fbOn&&FIREBASE_LOGIN?"🔒 Secure: Firebase admin login required to change anything":"⚠ Not secure: anyone can edit your database"}</b></p>`+(fbOn&&FIREBASE_LOGIN&&fbAuth.currentUser?`<p>Signed in as ${esc(fbAuth.currentUser.email)}</p>`+b("pwr","","","","Send password reset email")+b("out","","","","Sign out"):'<p class="mu">To turn protection on: set FIREBASE_LOGIN=true in index.html and publish the secure Firestore rules.</p>')+'<p class="mu">The admin code only hides the button. The Firebase login and rules are what actually protect your data.</p>'+b("secset","","","","🔐 Security settings (change code, auto sign-out)","pri")+`<p class="mu">Admin code: ${db.settings.codeHash?"custom (saved)":"default, please change it"} • Auto sign-out: ${db.settings.idleMin??15} min • 5 wrong codes lock the admin button for 10 min</p>`;
+if(tab=="Announcements")h+=b("addN","","","","+ Add announcement","pri")+db.announcements.map(a=>`<div class="row">${esc(a.text)} <small>${a.on?"Enabled":"Disabled"}</small>${b("edN",a.id,0,0,"Edit")}${b("tgN",a.id,0,0,a.on?"Disable":"Enable")}${b("delN",a.id,0,0,"Delete","dan")}</div>`).join("");
+if(tab=="Settings")h+=`<p>Website name: <b>${esc(db.settings.name)}</b></p>`+b("set","","","","Edit website settings","pri");
+if(tab=="Backup")h+=`<p class="mu">Data lives only in this browser. Export a backup often.</p>${b("exp","","","","EXPORT DATA","pri")}${b("csv","","","","EXPORT LINKS (CSV)")}${b("imp","","","","IMPORT / RESTORE DATA")}${b("rst","","","","RESET DEMO DATA","dan")}`;
+$("#ab").innerHTML=h}
+/* ===== LOOK & FEEL: templates, animations, loading screen ===== */
+const AN=()=>({...ANIM_DEF,...(db.settings.anim||{})}),myTpl=()=>{try{return localStorage.getItem("vawMyTpl")||""}catch(e){return""}},
+LS=[["ring","Spinner ring"],["dots","Bouncing dots"],["pulse","Pulse logo"],["petals","Sakura petals"],["bars","Equalizer"],["orbit","Orbit"],["line","Sweep line"]];
+let fxKey="",ready=0,io,toastT;const revealed=new Set();
+function buildFx(a,fe){const k=[a.fx,a.fxn,a.speed,a.off,fe?fe.id+"|"+fe.fx+"|"+fe.fxn:""].join();if(k==fxKey)return;fxKey=k;const f=$("#fx"),fo=fe&&fe.fx&&fe.fx.trim(),
+L=fo?fe.fx.trim().split(/\s+/):a.fx!="none"?[{petals:"🌸",stars:"✦",snow:"❄"}[a.fx]||"🌸"]:null,N=fo?(+fe.fxn||18):a.fxn;f.innerHTML="";if(a.off||!L)return;
+for(let i=0;i<N;i++){const s=document.createElement("span");s.textContent=L[Math.floor(Math.random()*L.length)];s.style.cssText=`left:${Math.random()*100}%;font-size:${10+Math.random()*14}px;animation-duration:${(7+Math.random()*8)*a.speed}s;animation-delay:-${Math.random()*12}s;--dx:${Math.random()*160-80}px`;f.appendChild(s)}}
+function applyLook(){const s=db.settings,a=AN(),r=document.documentElement,bd=document.body,mine=myTpl(),
+t=s.tplPick!==false&&TPL[mine]?mine:TPL[s.tpl]?s.tpl:"classic",custom=s.accent&&s.accent.toLowerCase()!="#ffb938";
+const f=activeFest(),FV=f?festVars(f):null;r.setAttribute("data-tpl",f?"classic":t);custom?r.style.setProperty("--ac",s.accent):r.style.removeProperty("--ac");
+FV_KEYS.forEach(k=>{if(FV)r.style.setProperty(k,FV[k]);else if(k!="--ac")r.style.removeProperty(k)});r.style.setProperty("--spd",a.speed);
+bd.dataset.card=a.card;bd.dataset.hero=a.hero;bd.dataset.reveal=a.reveal&&!a.off?"on":"off";bd.classList.toggle("nomo",!!a.off);
+$("#tbtn").hidden=s.tplPick===false||!!f;buildFx(a,f);
+if(!festPrev)try{localStorage.setItem("vawAnim",JSON.stringify({...a,ch:(s.name||"V")[0],text:f&&f.load?f.load:a.text}));localStorage.setItem("vawTpl",TPL[s.tpl]?s.tpl:"classic");
+FV?localStorage.setItem("vawFest",JSON.stringify({v:FV,until:Date.now()+36*36e5})):localStorage.removeItem("vawFest")}catch(e){}}
+function revealInit(){const a=AN(),all=[...document.querySelectorAll(".sec")];
+if(!a.reveal||a.off||!("IntersectionObserver" in window)){all.forEach(s=>s.classList.add("in"));return}
+io=io||new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting){x.target.classList.add("in");revealed.add(x.target.id);io.unobserve(x.target)}}),{threshold:.06});
+all.forEach(s=>{if(s.classList.contains("in"))return;revealed.has(s.id)?s.classList.add("in"):io.observe(s)})}
+function readyOnce(){if(!ready){ready=1;hideLoader()}}
+function hideLoader(now){const l=$("#ldr");if(!l||l.dataset.h)return;l.dataset.h=1;const w=now?0:Math.max(0,(window.__min||0)-(Date.now()-(window.__t0||Date.now())));setTimeout(()=>{l.classList.add("out");setTimeout(()=>l.remove(),600)},w)}
+function previewLoader(){const a=AN(),l=document.createElement("div");l.className="ldr";l.setAttribute("data-ls",a.style);l.style.setProperty("--spd",a.speed);l.innerHTML=vawLdr(a.style,(db.settings.name||"V")[0]);l.querySelector(".lt").textContent=a.text;l.onclick=()=>l.remove();document.body.appendChild(l);
+setTimeout(()=>{l.classList.add("out");setTimeout(()=>l.remove(),600)},Math.max(1800,a.min))}
+function toast(m){let t=$("#toast");if(!t){t=document.createElement("div");t.id="toast";t.setAttribute("role","status");document.body.appendChild(t)}t.textContent=m;t.classList.add("on");clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove("on"),2200)}
+function setAnim(k,v){db.settings.anim={...AN(),[k]:v};commit()}
+const tplCards=(cur,act)=>`<div class="tplg">${Object.entries(TPL).map(([k,t])=>`<button class="tc ${cur==k?"on":""}" data-a="${act}" data-i="${k}" aria-pressed="${cur==k}"><span class="sw">${t.c.map(c=>`<i style="background:${c}"></i>`).join("")}</span><b>${t.n}</b><small>${t.d}</small>${cur==k?"<em>✓ Active</em>":""}</button>`).join("")}</div>`;
+function tplHTML(){const c=TPL[db.settings.tpl]?db.settings.tpl:"classic";return`${activeFest()?'<p class="note">🎉 A festival theme is live right now, so it overrides the template until it ends (see the Festivals tab).</p>':""}<p class="note">Pick the look of your public website. It applies to every visitor straight away.</p>${tplCards(c,"tpl")}<label class="ck" style="margin-top:1rem"><input type="checkbox" data-st="tplPick" ${db.settings.tplPick!==false?"checked":""}> Let visitors switch template with the 🎨 button (saved only in their own browser)</label>`}
+function openTplPicker(){const s=db.settings,cur=TPL[myTpl()]?myTpl():TPL[s.tpl]?s.tpl:"classic";$("#fb").innerHTML=`<h3>🎨 Choose a look</h3>${tplCards(cur,"myTpl")}<div class="acts"><button data-a="myTpl" data-i="">Use site default</button><button data-a="closeF">Close</button></div>`;$("#fm").classList.add("on")}
+function animHTML(){const a=AN(),ch=(db.settings.name||"V")[0],
+sel=(k,l,o,n)=>`<label>${l}<select data-an="${k}"${n?' data-num="1"':""}>${o.map(([v,t])=>`<option value="${v}" ${v==a[k]?"selected":""}>${t}</option>`).join("")}</select></label>`,
+chk=(k,l)=>`<label class="ck"><input type="checkbox" data-an="${k}" ${a[k]?"checked":""}> ${l}</label>`,
+rng=(k,l,mn,mx,st,u)=>`<label>${l}<input type="range" data-an="${k}" data-num="1" data-u="${u}" min="${mn}" max="${mx}" step="${st}" value="${a[k]}"><b>${a[k]}${u}</b></label>`;
+return`<p class="note">Animation Control Centre: every change saves instantly and applies to all visitors from their next visit.</p>
+<h3>⏳ Loading screen</h3>${chk("loader","Show a loading animation when visitors open the website")}
+<div class="lpick">${LS.map(([k,n])=>`<button class="${a.style==k?"on":""}" data-a="anStyle" data-i="${k}" aria-pressed="${a.style==k}"><div class="lan">${vawLoader(k,ch)}</div>${n}</button>`).join("")}</div>
+<div class="cg">${sel("freq","Show it",[["always","On every page load"],["session","Once per browser session"]])}<label>Loading text<input data-an="text" value="${esc(a.text)}" maxlength="40"></label>${rng("min","Minimum show time",0,4000,100,"ms")}${sel("speed","Animation speed",[[1.6,"Slow"],[1,"Normal"],[0.6,"Fast"]],1)}</div>
+<div class="acts"><button class="pri" data-a="anPrev">▶ Preview loading screen</button></div>
+<h3>✨ Page effects</h3><div class="cg">${sel("card","Card hover effect",[["lift","Lift"],["zoom","Zoom"],["tilt","3D tilt"],["glow","Glow"],["none","None"]])}${sel("hero","Hero banner",[["kenburns","Slow zoom (Ken Burns)"],["none","Still"]])}${sel("fx","Floating effect",[["none","None"],["petals","🌸 Sakura petals"],["stars","✦ Twinkle stars"],["snow","❄ Snowfall"]])}${rng("fxn","Effect amount",6,40,1,"")}</div>${chk("reveal","Fade sections in while scrolling")}
+<h3>🛑 Master switch</h3>${chk("off","Turn OFF all animations (loader, effects, hover motion)")}
+<div class="acts">${b("anReset","","","","Reset animations to default","dan")}</div>`}
+/* ===== FESTIVAL THEMES: change colours, effects, banner and loader text by date ===== */
+const FV_KEYS=["--bg","--sf","--sf2","--tx","--mu","--ac","--ac2","--acx","--hd","--hv","--bd","--bd2"],
+hx=c=>[1,3,5].map(i=>parseInt(c.slice(i,i+2),16)),
+mix=(a,c,t)=>{const x=hx(a),y=hx(c);return"#"+x.map((v,i)=>Math.round(v+(y[i]-v)*t).toString(16).padStart(2,"0")).join("")},
+lum=c=>{const[r,g,bl]=hx(c);return(.299*r+.587*g+.114*bl)/255},
+HEX=/^#[0-9a-f]{6}$/i,cc=(c,d)=>HEX.test(c||"")?c:d,
+P=(id,name,emoji,start,end,yearly,banner,load,fx,bg,sf,ac,ac2,tx)=>({id,name,emoji,start,end,yearly,on:true,banner,load,fx,fxn:18,colors:{bg,sf,ac,ac2,tx}}),
+/* Fixed-date festivals repeat every year. Diwali and Holi move every year: edit their dates in the Festivals tab. */
+FEST_PRESETS=[
+P("halloween","Halloween","🎃","2026-10-20","2026-11-01",true,"🎃 Happy Halloween! Spooky season is here 🦇","Boo! Loading…","🎃 🦇 👻","#120a1f","#1f1230","#ff7a1a","#8e44ff","#fff1e0"),
+P("diwali","Diwali","🪔","2026-11-06","2026-11-10",false,"🪔 Happy Diwali! Wishing you light and joy ✨","Lighting the diyas…","🪔 ✨ 🎆","#1a0b05","#2b1408","#ffb300","#ff5722","#fff4d6"),
+P("christmas","Christmas","🎄","2026-12-20","2026-12-26",true,"🎄 Merry Christmas! ❄","Ho ho ho… loading","❄ 🎄 ⭐","#07190f","#0f2a1a","#ff3b3b","#ffd54a","#f4fff6"),
+P("newyear","New Year","🎆","2026-12-30","2027-01-02",true,"🎆 Happy New Year! 🎉","Counting down…","🎆 🎉 ✨","#0a0a1f","#16163a","#ffd700","#ff4fa3","#ffffff"),
+P("sankranti","Sankranti","🪁","2027-01-13","2027-01-16",true,"🪁 Happy Sankranti!","Flying kites…","🪁 🌾","#0d1f2d","#14303f","#ffa41b","#2fd1b5","#fff8e8"),
+P("republic","Republic Day","🇮🇳","2027-01-25","2027-01-27",true,"🇮🇳 Happy Republic Day!","Jai Hind! Loading…","🇮🇳 🕊️","#0b1530","#14224a","#ff9933","#138808","#ffffff"),
+P("valentine","Valentine's Day","💖","2027-02-13","2027-02-15",true,"💖 Happy Valentine's Day!","Spreading love…","💖 🌹 💕","#200a18","#34122a","#ff4d8d","#ff9ecb","#fff0f6"),
+P("holi","Holi","🎨","2027-03-21","2027-03-23",false,"🎨 Happy Holi! Enjoy the colours 🌈","Splashing colours…","🎨 💦 🌈","#1a0f2e","#2a1a48","#ff3d9a","#22d3ee","#ffffff"),
+P("independence","Independence Day","🇮🇳","2026-08-14","2026-08-16",true,"🇮🇳 Happy Independence Day!","Jai Hind! Loading…","🇮🇳 🕊️","#0b1530","#14224a","#ff9933","#138808","#ffffff")],
+FFIELDS=[["name","Festival name","text"],["emoji","Emoji icon (shown in lists)","text"],["start","Start date","date"],["end","End date","date"],["yearly","Repeat every year on the same dates","check"],["banner","Top banner message (blank = none)","text"],["load","Loading screen text (blank = normal text)","text"],["fx","Floating emojis, separated by spaces (blank = none)","text"],["fxn","How many floating emojis","number"],["bg","Background colour","color"],["sf","Cards colour","color"],["ac","Accent colour (buttons, highlights)","color"],["ac2","Second accent colour","color"],["tx","Text colour","color"],["on","Enabled","check"]];
+let festPrev=null;
+function FE(){const f=db.settings.fest||{};return{auto:f.auto!==false,force:f.force||"",list:f.list||FEST_PRESETS.map(p=>({...p,colors:{...p.colors}}))}}
+function festIn(f,d){if(!f.start||!f.end)return false;if(f.yearly){const m=d.slice(5),s=f.start.slice(5),e=f.end.slice(5);return s<=e?m>=s&&m<=e:m>=s||m<=e}return d>=f.start&&d<=f.end}
+function activeFest(){if(festPrev)return festPrev;const F=FE();if(F.force=="off")return null;if(F.force)return F.list.find(f=>f.id==F.force)||null;if(!F.auto)return null;const d=dayKey();return F.list.find(f=>f.on!==false&&festIn(f,d))||null}
+function festVars(f){const c=f.colors||{},bg=cc(c.bg,"#14101f"),sf=cc(c.sf,"#211a33"),ac=cc(c.ac,"#ffb938"),ac2=cc(c.ac2,"#7c8cff"),tx=cc(c.tx,"#ffffff");
+return{"--bg":bg,"--sf":sf,"--sf2":mix(sf,tx,.14),"--tx":tx,"--mu":mix(tx,bg,.42),"--ac":ac,"--ac2":ac2,"--acx":lum(ac)>.6?"#111111":"#ffffff","--hd":`rgba(${hx(bg).join(",")},.9)`,"--hv":mix(sf,ac,.3),"--bd":mix(sf,ac2,.45),"--bd2":mix(sf,tx,.1)}}
+function festBanner(){const f=activeFest();return f&&f.banner?`<div class="ann fest">${esc(f.banner)}</div>`:""}
+function setFest(p){const F=FE();db.settings.fest={...F,...p};commit()}
+function festPreview(id){festPrev=FE().list.find(x=>x.id==id)||null;refresh();pvBar()}
+function festStop(){festPrev=null;refresh();pvBar()}
+function pvBar(){let e=$("#pvbar");if(!festPrev){e&&e.remove();return}if(!e){e=document.createElement("div");e.id="pvbar";document.body.appendChild(e)}e.innerHTML=`<span>👁 Previewing ${esc(festPrev.emoji)} ${esc(festPrev.name)} (only you)</span><button data-a="fstop">Stop</button>`}
+function festTog(id){const F=FE(),f=F.list.find(x=>x.id==id);if(!f)return;f.on=f.on===false;db.settings.fest={...F};commit()}
+function festDel(id){if(!confirm("Delete this festival theme?"))return;const F=FE();F.list=F.list.filter(x=>x.id!=id);if(F.force==id)F.force="";db.settings.fest={...F};commit()}
+function festRestore(){const F=FE(),have=new Set(F.list.map(x=>x.id)),add=FEST_PRESETS.filter(p=>!have.has(p.id));if(!add.length)return toast("All default festivals are already in the list");F.list=[...F.list,...add.map(p=>({...p,colors:{...p.colors}}))];db.settings.fest={...F};commit()}
+function festEdit(id){const F=FE(),f=id?F.list.find(x=>x.id==id):{name:"",emoji:"🎉",start:dayKey(),end:dayKey(Date.now()+3*864e5),yearly:false,on:true,banner:"",load:"",fx:"🎉 ✨",fxn:18,colors:{bg:"#14101f",sf:"#211a33",ac:"#ffb938",ac2:"#7c8cff",tx:"#ffffff"}};
+if(!f)return;ask(id?"Edit festival":"Add festival",FFIELDS,{...f,...f.colors},v=>{
+if(!v.name){alert("Please enter a festival name.");return false}if(!v.start||!v.end){alert("Please choose a start and end date.");return false}if(!v.yearly&&v.end<v.start){alert("The end date must be on or after the start date.");return false}
+const o={id:id||"f"+uid(),name:v.name,emoji:v.emoji||"🎉",start:v.start,end:v.end,yearly:v.yearly,on:v.on,banner:v.banner,load:v.load,fx:v.fx,fxn:Math.max(4,Math.min(60,Math.round(v.fxn)||18)),colors:{bg:v.bg,sf:v.sf,ac:v.ac,ac2:v.ac2,tx:v.tx}},i=F.list.findIndex(x=>x.id==o.id);
+i>=0?F.list[i]=o:F.list.push(o);db.settings.fest={...F};commit()})}
+const fdate=(s,y)=>{const t=new Date(s+"T00:00:00Z");return isNaN(t)?s:t.toLocaleDateString("en-GB",{day:"numeric",month:"short",...(y?{year:"numeric"}:{}),timeZone:"UTC"})};
+function festHTML(){const F=FE(),act=activeFest(),d=dayKey();
+return`<p class="note">Festival themes change your whole website (colours, floating emojis, top banner and loading text) automatically on the festival dates, then it goes back to your normal template. Fixed-date festivals repeat every year. Festivals that move every year (Diwali, Holi) need new dates each year.</p>
+<div class="row">${act?`<b>${esc(act.emoji)} ${esc(act.name)}</b> is live on your website${festPrev?" (preview, only you can see it)":""}.`:"No festival is live right now, so your normal template is showing."} ${festPrev?b("fstop","","","","■ Stop preview","pri"):""}</div>
+<label class="ck"><input type="checkbox" data-fe="auto" ${F.auto?"checked":""}> Switch themes automatically on the festival dates</label>
+<label>Manual control<select data-fe="force"><option value="">Automatic (follow the dates)</option><option value="off" ${F.force=="off"?"selected":""}>Always off (never change the theme)</option>${F.list.map(f=>`<option value="${esc(f.id)}" ${F.force==f.id?"selected":""}>Turn on now: ${esc(f.emoji)} ${esc(f.name)}</option>`).join("")}</select></label>
+<h3>Festivals</h3>${F.list.map(f=>`<div class="row"><span class="fsw">${["bg","sf","ac","ac2","tx"].map(k=>`<i style="background:${esc((f.colors||{})[k]||"#888888")}"></i>`).join("")}</span><b>${esc(f.emoji)} ${esc(f.name)}</b>${act&&act.id==f.id&&!festPrev?' <span class="live"><i></i>LIVE</span>':""}<small>${fdate(f.start,!f.yearly)} – ${fdate(f.end,!f.yearly)}${f.yearly?" • repeats every year":""}${!f.yearly&&f.end<d?" • ⚠ date has passed, edit it for next year":""}</small>${b("fprev",f.id,0,0,"👁 Preview")}${b("fon",f.id,0,0,f.on===false?"Disabled":"Enabled")}${b("fed",f.id,0,0,"Edit")}${b("fdel",f.id,0,0,"Delete","dan")}</div>`).join("")||'<p class="mu">No festivals yet.</p>'}
+<div class="acts">${b("fadd","","","","+ Add festival","pri")}${b("frest","","","","Restore missing default festivals")}</div>`}
+/* ===== WEEKLY SCHEDULE (saved inside settings, so no new Firestore rules are needed) ===== */
+const DAYS=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],SC_COL=["#00e5ff","#d500f9","#ff4081"],
+istNow=()=>new Date(Date.now()+19800000),todayIdx=()=>istNow().getUTCDay(),nowMin=()=>{const d=istNow();return d.getUTCHours()*60+d.getUTCMinutes()},
+tmin=t=>{const p=String(t||"0:0").split(":");return(+p[0]||0)*60+(+p[1]||0)},
+t12=t=>{const m=tmin(t),h=Math.floor(m/60)%24;return{a:(h%12||12)+":"+String(m%60).padStart(2,"0"),p:h<12?"am":"pm"}},
+cssU=u=>"url("+String(u).replace(/['"()\s\\<>]/g,c=>"%"+c.charCodeAt(0).toString(16).padStart(2,"0"))+")",
+sched=()=>db.settings.sched||[];
+let schedSel=null;
+function schedBody(){const all=sched().filter(e=>e.on!==false),t0=todayIdx();if(schedSel===null)schedSel=t0;
+const order=Array.from({length:7},(_,i)=>(t0+i)%7),list=all.filter(e=>e.day==schedSel).sort((a,b)=>tmin(a.time)-tmin(b.time)),isT=schedSel==t0,nm=nowMin();let nextDone=false;
+const tabs=order.map(d=>{const n=all.filter(e=>e.day==d).length;return`<button class="sd${d==schedSel?" on":""}${d==t0?" today":""}" data-a="sday" data-i="${d}" aria-pressed="${d==schedSel}"><span class="ic">📅</span>${DAYS[d]}${n?`<em>${n}</em>`:""}</button>`}).join("");
+const rows=list.map((e,i)=>{const s=tmin(e.time),t=t12(e.time),it=e.itemId?item(e.itemId):null,link=it&&!it.hidden?it:null,im=e.img||(it&&(it.backdrop||it.poster))||"",c=SC_COL[i%3],c2=SC_COL[(i+1)%3];let st="",cls="";
+if(isT){if(nm>=s&&nm<s+30){st='<span class="sbadge live">● LIVE NOW</span>';cls=" now"}else if(nm>=s+30)cls=" past";else if(!nextDone){nextDone=true;cls=" next";const d=s-nm;st=`<span class="sbadge up">⏱ UP NEXT · in ${d>=60?Math.floor(d/60)+"h ":""}${d%60}m</span>`}}
+const badge=e.badge?`<span class="sbadge"><i>✱</i> ${esc(e.badge)}</span>`:"",
+inner=`${im?`<span class="im" style="background-image:${cssU(im)}"></span>`:""}<b>${esc(e.title)}</b><span class="sbs">${badge}${st}</span>`,
+tag=link?`<button class="sc" data-a="open" data-i="${link.id}" aria-label="Open ${esc(e.title)}">${inner}</button>`:`<div class="sc">${inner}</div>`;
+return`<div class="srow${cls}${i==0?" first":""}${i==list.length-1?" last":""}" style="--c:${c};--c2:${c2};--i:${i}"><div class="dt"><i></i></div><div class="stm"><b>${t.a}</b><small>${t.p}</small></div>${tag}</div>`}).join("");
+return`<div class="stabs"><button class="sar" data-a="snav" data-i="-1" aria-label="Previous day">‹</button><div class="sdays" id="sdays">${tabs}</div><button class="sar" data-a="snav" data-i="1" aria-label="Next day">›</button></div>
+<h3 class="sh"><span class="ico">🕒</span><span>${DAYS[schedSel].toUpperCase()}</span><em>SCHEDULE</em></h3><p class="mu stz">All times are in India time (IST)${isT?" • today":""}</p>
+<div class="stl">${rows||'<p class="empty">💤 Nothing scheduled for this day yet.</p>'}</div>
+<div class="sstay"><span class="mg">📢</span><div><b>Stay Updated!</b><p>${esc(db.settings.schedNote||"New episodes are added soon as they are indexed. Keep visiting for more!")}</p></div></div>`}
+function renderSchedule(){if(db.settings.schedOn===false||!sched().some(e=>e.on!==false))return"";return`<section class="sec" id="sched"><h2>📅 Release Schedule</h2><div class="sbox" id="sbody">${schedBody()}</div></section>`}
+function paintSched(anim){const e=$("#sbody");if(!e)return;const r0=$("#sdays"),sl=r0?r0.scrollLeft:0;e.classList.toggle("noan",!anim);e.innerHTML=schedBody();const r=$("#sdays"),a=e.querySelector(".sd.on");
+if(r){if(anim&&a)r.scrollTo({left:a.offsetLeft-r.clientWidth/2+a.clientWidth/2,behavior:"smooth"});else r.scrollLeft=sl}}
+function schedDay(i){schedSel=+i;paintSched(true)}
+function schedNav(d){schedSel=(((schedSel==null?todayIdx():schedSel)+ +d)%7+7)%7;paintSched(true)}
+setInterval(()=>{if(!document.hidden&&$("#sbody"))paintSched(false)},30000);
+const SCF=[["title","Show title","text"],["link","Link to a title on your site (the card will open it)","select",()=>["— none —",...db.items.map(x=>esc(x.title))]],["day","Day","select",DAYS],["time","Time (India time)","time"],["badge","Badge text (e.g. NEW EPISODE, FINALE)","text"],["img","Card image URL (blank = use the linked title's image)","text"],["on","Show on website","check"]];
+function schedEdit(id){const L=sched(),e=id?L.find(x=>x.id==id):null,it=e&&e.itemId?item(e.itemId):null,
+init=e?{...e,day:DAYS[e.day],link:it?esc(it.title):"— none —"}:{title:"",link:"— none —",day:DAYS[todayIdx()],time:"19:00",badge:"NEW EPISODE",img:"",on:true};
+ask(e?"Edit scheduled show":"Add scheduled show",SCF,init,v=>{if(v.img&&!/^https?:\/\//i.test(v.img)){alert("The image link must start with https://");return false}
+const lk=db.items.find(x=>x.title==v.link),o={id:e?e.id:uid(),title:v.title,itemId:lk?lk.id:"",day:Math.max(0,DAYS.indexOf(v.day)),time:v.time||"19:00",badge:v.badge,img:v.img,on:v.on},n=[...L];
+e?n[n.findIndex(x=>x.id==e.id)]=o:n.push(o);db.settings.sched=n;commit()})}
+function schedTog(i){const e=sched().find(x=>x.id==i);if(e){e.on=e.on===false;commit()}}
+function schedDel(i){if(confirm("Delete this scheduled show?")){db.settings.sched=sched().filter(x=>x.id!=i);commit()}}
+function schedNote(){ask("Stay Updated note",[["schedNote","Message shown under the schedule","textarea"]],{schedNote:db.settings.schedNote||""},v=>{db.settings.schedNote=v.schedNote;commit()})}
+function schedSample(){const src=db.items.length?db.items.map(x=>({t:x.title,i:x.id})):["Star Pups Academy","Dragon Kite Saga","Chhota Rocket"].map(t=>({t,i:""})),T=["19:30","22:00","22:30","23:00"],B=["NEW EPISODE","NEW EPISODE","NEW SEASON","FINALE"],t0=todayIdx(),n=[];
+for(let d=0;d<5;d++)for(let k=0;k<(d?2:4);k++){const s=src[(d*3+k)%src.length];n.push({id:uid(),title:s.t,itemId:s.i,day:(t0+d)%7,time:T[k],badge:B[(k+d)%B.length],img:"",on:true})}
+db.settings.sched=[...sched(),...n];commit()}
+function schedAdminHTML(){const L=[...sched()].sort((a,b)=>a.day-b.day||tmin(a.time)-tmin(b.time)),
+rows=L.map(e=>{const t=t12(e.time);return`<div class="row"><b>${esc(e.title)}</b> <small>${DAYS[e.day]} • ${t.a} ${t.p} • ${esc(e.badge||"no badge")} • ${e.on!==false?"Visible":"Hidden"}${e.itemId&&item(e.itemId)?" • linked to a title":""}</small>${b("sed",e.id,0,0,"Edit")}${b("stg",e.id,0,0,e.on!==false?"Hide":"Show")}${b("sdel",e.id,0,0,"Delete","dan")}</div>`}).join("")||'<p class="mu">No shows scheduled yet. Add one, or load the sample week to see how it looks.</p>';
+return`<p class="note">Weekly release schedule: visitors see day tabs, a timeline with LIVE NOW / UP NEXT, and a Stay Updated box. Times are India time. The section stays hidden until you add at least one show.</p>
+<label class="ck"><input type="checkbox" data-st="schedOn" ${db.settings.schedOn!==false?"checked":""}> Show the schedule on the website</label>
+<div class="acts">${b("sadd","","","","+ Add show","pri")}${b("snote","","","","Edit Stay Updated note")}${b("ssamp","","","","Load sample week")}${b("sclr","","","","Clear all","dan")}</div>`+rows}
+/* ===== DAILY REALTIME VISIT COUNTER ===== */
+const IST=19800000,dayKey=(t=Date.now())=>new Date(t+IST).toISOString().slice(0,10),
+RULES=`match /visits/{day} {
+  allow read: if request.auth != null;
+  allow create: if request.resource.data.keys().hasOnly(['day','n','u'])
+                && request.resource.data.n == 1 && request.resource.data.u <= 1;
+  allow update: if request.resource.data.keys().hasOnly(['day','n','u'])
+                && request.resource.data.n == resource.data.n + 1
+                && request.resource.data.u >= resource.data.u
+                && request.resource.data.u <= resource.data.u + 1;
+}`;
+let V={},vErr="",vUnsub=null,vAt=0;
+function trackVisit(){try{if(sessionStorage.getItem("vawV"))return;sessionStorage.setItem("vawV","1")}catch(e){}
+const d=dayKey();let first=true;try{first=localStorage.getItem("vawU")!=d;localStorage.setItem("vawU",d)}catch(e){}
+if(fbOn){fs.collection("visits").doc(d).set({day:d,n:firebase.firestore.FieldValue.increment(1),u:firebase.firestore.FieldValue.increment(first?1:0)},{merge:true}).catch(()=>{});return}
+try{const v=JSON.parse(localStorage.getItem("vawVisits"))||{},x=v[d]||{day:d,n:0,u:0};x.n++;if(first)x.u++;v[d]=x;localStorage.setItem("vawVisits",JSON.stringify(v))}catch(e){}}
+function readLocalVisits(){try{V=JSON.parse(localStorage.getItem("vawVisits"))||{}}catch(e){V={}}vAt=Date.now()}
+function paintVisits(){const e=$("#vis");if(e)e.innerHTML=visitsHTML(tab=="Visitors")}
+function watchVisits(){if(!fbOn){readLocalVisits();paintVisits();return}if(vUnsub)return;
+vUnsub=fs.collection("visits").orderBy("day","desc").limit(60).onSnapshot(q=>{vErr="";V={};q.docs.forEach(d=>V[d.id]=d.data());vAt=Date.now();paintVisits()},e=>{vErr=e.message;vUnsub=null;paintVisits()})}
+function stopVisits(){if(vUnsub){vUnsub();vUnsub=null}}
+window.addEventListener("storage",e=>{if(e.key=="vawVisits"&&!fbOn){readLocalVisits();paintVisits()}});
+function visitsHTML(full){
+if(vErr)return`<div class="note"><b>The visit counter can't be read yet:</b> ${esc(vErr)}<br>In Firebase go to Firestore → Rules, add this inside <code>match /databases/{database}/documents { … }</code> and publish:<pre>${esc(RULES)}</pre></div>`;
+const day=k=>dayKey(Date.now()-k*864e5),get=k=>V[day(k)]||{},sum=k=>Object.keys(V).filter(d=>d>=day(k-1)).reduce((a,d)=>a+(V[d].n||0),0),
+ds=Array.from({length:14},(_,i)=>({d:day(13-i),n:get(13-i).n||0})),mx=Math.max(1,...ds.map(x=>x.n)),st=(n,l)=>`<div><b>${n}</b>${l}</div>`;
+return`<p><span class="live"><i></i>LIVE</span> <small style="display:inline">${vAt?"updated "+new Date(vAt).toLocaleTimeString():"connecting…"} • days follow India time (IST) • one count per visitor session</small></p>
+<div class="stats">${st(get(0).n||0,"Visits today")+st(get(0).u||0,"Unique visitors today")+st(get(1).n||0,"Yesterday")+st(sum(7),"Last 7 days")+st(sum(30),"Last 30 days")}</div>
+<div class="vchart" role="img" aria-label="Visits per day for the last 14 days">${ds.map(x=>`<div class="vc" title="${x.d}: ${x.n}"><span>${x.n}</span><div class="bw"><i style="height:${Math.max(3,x.n/mx*100)}%"></i></div><small>${x.d.slice(8)}</small></div>`).join("")}</div>`
++(fbOn?"":'<p class="mu">Local-only mode: this counts visits from this browser only. Connect Firebase to count everyone.</p>')
++(full?`<h3>Last 30 days</h3><div class="tw"><table><tr><th>Date<th>Visits<th>Unique visitors</tr>${Object.keys(V).sort().reverse().slice(0,30).map(d=>`<tr><td>${d}<td>${V[d].n||0}<td>${V[d].u||0}`).join("")||"<tr><td colspan=3>No visits yet"}</table></div>`:"")}
+/* broken poster links fall back to the generated placeholder */
+document.addEventListener("error",e=>{const i=e.target;if(i.tagName=="IMG"&&!i.dataset.fb){i.dataset.fb=1;i.src=art((i.alt||"").replace(/^Poster of /,"")||"?",300,450)}},true);
+addEventListener("scroll",()=>$("#totop").classList.toggle("on",scrollY>600),{passive:true});
+/* ===== EVENTS ===== */
+const A={burger:()=>$("#nav").classList.toggle("open"),go,srch:()=>{go("browse");$("#q").focus({preventScroll:true})},cat:g=>{$("#fg").value=g;performSearch();go("browse")},
+open:openTitle,close:()=>$("#dm").classList.remove("on"),rate:submitRating,dle:downloadEpisode,dlm:downloadMovie,
+adm:openAdminLogin,closeLg:()=>$("#lg").classList.remove("on"),closeAdm:closeAdmin,closeF:()=>$("#fm").classList.remove("on"),
+tab:t=>{tab=t;renderAdminDashboard()},addC:()=>addContent("cartoon"),addA:()=>addContent("anime"),secset:securitySettings,pwr:()=>fbAuth.sendPasswordResetEmail(fbAuth.currentUser.email).then(()=>alert("Password reset email sent.")).catch(e=>alert(e.message)),pick:i=>sel.has(i)?sel.delete(i):sel.add(i),pall:selectAll,bk:bulkAction,dup:duplicateContent,sr:setRatings,rs:i=>{db.reports=(db.reports||[]).filter(r=>r.id!=i);commit()},rep:reportLink,csv:exportLinks,bulkD:bulkDownloads,hd:i=>toggle(i,"hidden"),bulk:bulkEpisodes,out:()=>fbAuth.signOut().then(closeAdmin),addM:()=>addContent("movie"),ed:editContent,del:deleteContent,
+ft:i=>toggle(i,"featured"),tr:i=>toggle(i,"trending"),hero:i=>{db.settings.heroId=i;commit()},
+addS:addSeason,edS:editSeason,delS:deleteSeason,addE:addEpisode,edE:editEpisode,delE:deleteEpisode,addD:addDownload,edD:editDownload,delD:deleteDownload,
+rr:resetRating,rall:resetAllRatings,
+top:()=>scrollTo({top:0,behavior:"smooth"}),tpicker:openTplPicker,fprev:festPreview,fstop:festStop,fadd:()=>festEdit(),fed:festEdit,fdel:festDel,fon:festTog,frest:festRestore,anPrev:previewLoader,sday:schedDay,snav:schedNav,sadd:()=>schedEdit(),sed:schedEdit,sdel:schedDel,stg:schedTog,snote:schedNote,ssamp:schedSample,sclr:()=>{if(confirm("Delete the whole schedule?")){db.settings.sched=[];commit()}},anStyle:k=>setAnim("style",k),
+anReset:()=>{if(confirm("Reset all animation settings to default?")){db.settings.anim={...ANIM_DEF};commit()}},
+tpl:k=>{try{localStorage.removeItem("vawMyTpl")}catch(e){}db.settings.tpl=k;commit()},
+myTpl:k=>{try{k?localStorage.setItem("vawMyTpl",k):localStorage.removeItem("vawMyTpl")}catch(e){}applyLook();openTplPicker()},
+addN:()=>ask("Add announcement",AF,{on:true},v=>{db.announcements.push({id:uid(),...v});commit()}),
+edN:i=>{const a=db.announcements.find(x=>x.id==i);ask("Edit announcement",AF,a,v=>{Object.assign(a,v);commit()})},
+tgN:i=>{const a=db.announcements.find(x=>x.id==i);a.on=!a.on;commit()},
+delN:i=>{if(confirm("Delete this announcement?")){db.announcements=db.announcements.filter(x=>x.id!=i);commit()}},
+set:()=>ask("Website settings",STF,{...seed().settings,...db.settings},v=>{Object.assign(db.settings,v);commit()}),exp:exportData,imp:()=>$("#imp").click(),rst:resetDemo};
+document.addEventListener("click",e=>{const t=e.target.closest("[data-a]");if(t&&A[t.dataset.a])A[t.dataset.a](t.dataset.i,t.dataset.j,t.dataset.k)});
+$("#dm").onclick=e=>{if(e.target.id=="dm")A.close()};
+$("#lf").onsubmit=e=>{e.preventDefault();verifyAdmin()};
+$("#aq").oninput=renderAdminDashboard;["click","keydown"].forEach(e=>$("#adm").addEventListener(e,armIdle));
+$("#imp").onchange=e=>e.target.files[0]&&importData(e.target.files[0]);
+document.addEventListener("change",e=>{const t=e.target;if(t.dataset.an)setAnim(t.dataset.an,t.type=="checkbox"?t.checked:t.dataset.num?+t.value:t.value);else if(t.dataset.st){db.settings[t.dataset.st]=t.type=="checkbox"?t.checked:t.value;commit()}else if(t.dataset.fe)setFest({[t.dataset.fe]:t.type=="checkbox"?t.checked:t.value})});
+document.addEventListener("input",e=>{const t=e.target;if(t.type=="range"&&t.nextElementSibling)t.nextElementSibling.textContent=t.value+(t.dataset.u||"")});
+["#q","#fl","#fg","#fy","#fty"].forEach(s=>$(s).addEventListener("input",performSearch));
+document.addEventListener("keydown",e=>{if(e.key!="Escape")return;const id=["fm","lg","adm","dm"].find(i=>$("#"+i).classList.contains("on"));id=="adm"?closeAdmin():id&&$("#"+id).classList.remove("on")});
+fillFilters();renderHome();performSearch();
+if(fbOn){$("#res").innerHTML='<p class="empty">Loading…</p>';fbListen()}else readyOnce();
+revealInit();trackVisit();setTimeout(()=>hideLoader(1),7000);
+</script>
+</body>
+</html>
